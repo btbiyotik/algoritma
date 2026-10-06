@@ -1,0 +1,9 @@
+# Örnek 1: 1'den 10'a kadar sayıları yazdırma (en basit döngü)
+BAŞLA
+TAMSAYI i = 1                           # sayaç değişkeni
+@dongu: EĞER i > 10 İSE GİT @son        # şart: sayaç 10'u geçtiyse döngüden çık
+YAZ i                                   # döngünün gövdesi
+i++                                     # sayacı 1 artır
+GİT @dongu                              # başa dön
+@son: YAZ "Döngü bitti."
+BİTİR

@@ -1,0 +1,10 @@
+# ENBÜYÜK/ENKÜÇÜK örneği 2: Üçgen eşitsizliği kontrolü (üç sayı ile, ENBÜYÜK iç içe kullanılabilir)
+BAŞLA
+TAMSAYI a, b, c, enuzun
+OKU "1. kenar : ", a
+OKU "2. kenar : ", b
+OKU "3. kenar : ", c
+enuzun = ENBÜYÜK a, ENBÜYÜK b, c
+YAZ "En uzun kenar : ", enuzun
+EĞER enuzun < (a + b + c - enuzun) İSE YAZ "Bu üç kenarla üçgen çizilebilir." DEĞİLSE YAZ "Bu üç kenarla üçgen çizilemez."
+BİTİR

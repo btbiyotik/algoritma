@@ -1,0 +1,12 @@
+BAŞLA
+TAMSAYI n, i = 1, sonuc = 1
+OKU "Bir sayı girin : ", n
+EĞER n < 0 İSE GİT 11
+EĞER i > n İSE GİT 9
+sonuc *= i
+i++
+GİT 5
+YAZ n, "! = ", sonuc
+BİTİR
+YAZ "Negatif sayının faktöriyeli hesaplanamaz."
+BİTİR

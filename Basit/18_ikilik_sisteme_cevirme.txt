@@ -1,0 +1,14 @@
+BAŞLA
+TAMSAYI sayi, orj, kalan
+METİN ikilik = ""
+OKU "Onluk sayı : ", sayi
+orj = sayi
+EĞER sayi <= 0 İSE GİT 13
+kalan = sayi % 2
+EĞER kalan == 0 İSE ikilik = "0" + ikilik DEĞİLSE ikilik = "1" + ikilik
+sayi = sayi // 2
+EĞER sayi > 0 İSE GİT 7
+YAZ orj, " sayısının ikilik karşılığı : ", ikilik
+BİTİR
+YAZ "Lütfen pozitif bir tamsayı girin."
+BİTİR

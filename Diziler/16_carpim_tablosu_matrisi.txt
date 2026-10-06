@@ -1,0 +1,16 @@
+# Örnek 16: 1-9 çarpım tablosu matrisi - iç içe döngü ve METNEÇEVİR ile satır oluşturma
+BAŞLA
+TAMSAYI i = 1, j, sonuc
+METİN satir, hucre
+İKEN satirlar, @d1, @d9, i <= 9          # dış döngü: satırlar
+@d1: satir = ""
+j = 1
+TEKRARLA sutunlar, @i1, @i5, 9           # iç döngü: sütunlar
+@i1: sonuc = i * j
+hucre = METNEÇEVİR sonuc                 # sayıyı metne çevir
+EĞER sonuc < 10 İSE hucre = " " + hucre  # tek basamaklıları hizala
+satir = satir + hucre + "  "
+@i5: j++
+YAZ satir
+@d9: i++
+BİTİR

@@ -1,0 +1,20 @@
+BAŞLA
+METİN tamad, ad = "", soyad = ""
+TAMSAYI bosluk, i = 0
+OKU "Adınız ve soyadınız : ", tamad
+bosluk = " " ARA tamad
+EĞER bosluk == -1 İSE GİT 19
+EĞER i >= bosluk İSE GİT 11
+ad = ad + tamad[i]
+i++
+GİT 7
+i = bosluk + 1
+EĞER i >= UZUNLUK tamad İSE GİT 16
+soyad = soyad + tamad[i]
+i++
+GİT 12
+YAZ "Ad : ", ad
+YAZ "Soyad : ", soyad, "  (harf sayısı : ", UZUNLUK soyad, ")"
+BİTİR
+YAZ "Lütfen ad ve soyadı arada boşluk bırakarak yazın."
+BİTİR

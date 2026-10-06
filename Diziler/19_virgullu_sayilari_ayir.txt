@@ -1,0 +1,21 @@
+# Örnek 19: Virgülle ayrılmış sayıları ayrıştırma - İNDEKSARA, dilimleme, TAMSAYIYAÇEVİR
+BAŞLA
+METİN girdi, parca
+TAMSAYIDİZİSİ d[10]
+TAMSAYI bas = 0, konum, adet = 0, toplam = 0, i = 0
+OKU "Virgülle ayrılmış sayılar (örnek: 12,7,30) : ", girdi
+girdi = girdi + ","                      # sona da virgül ekle: her sayının sonunda virgül olsun
+İKEN ayir, @a1, @a9, bas < UZUNLUK girdi
+@a1: EĞER adet >= DİZİBOYUTU d İSE DÖNGÜYÜKIR ayir   # dizi doldu
+konum = İNDEKSARA girdi, bas, ","        # bas'tan itibaren ilk virgülün yeri
+EĞER konum == -1 İSE DÖNGÜYÜKIR ayir     # virgül kalmadı
+parca = girdi[bas:konum]                 # iki virgül arasındaki metin
+d[adet] = TAMSAYIYAÇEVİR parca           # metni sayıya çevirip diziye yaz
+adet++
+bas = konum + 1
+@a9: PAS
+TEKRARLA topla, @b1, @b2, adet
+@b1: toplam += d[i]
+@b2: i++
+YAZ adet, " sayı okundu. Toplam : ", toplam
+BİTİR

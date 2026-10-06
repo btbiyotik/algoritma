@@ -1,0 +1,17 @@
+# Örnek 3: Diziyi ters çevirme - iki uçtan çoklu atama ile takas
+BAŞLA
+TAMSAYIDİZİSİ d[6]
+TAMSAYI bas = 0, son
+son = DİZİBOYUTU d - 1                   # son elemanın indeksi
+TEKRARLA giris, @a1, @a2, 6
+@a1: OKU "Sayı : ", d[bas]
+@a2: bas++
+bas = 0
+son = DİZİBOYUTU d - 1
+İKEN takas, @b1, @b3, bas < son          # uçlar birbirine ulaşana kadar
+@b1: d[bas], d[son] = d[son], d[bas]     # tampon değişken kullanmadan tek satırda takas
+bas++
+@b3: son--
+YAZ "Ters çevrilmiş dizi :"
+DİZİYAZDIR d
+BİTİR

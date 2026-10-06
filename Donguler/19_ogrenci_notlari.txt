@@ -1,0 +1,25 @@
+# Örnek 19: İÇ İÇE DÖNGÜ - Öğrencilerin ders notlarından ortalama hesaplama
+BAŞLA
+TAMSAYI m, k, ogr = 1, ders, puan, toplam, gecen = 0
+ONDALIK ort
+OKU "Öğrenci sayısı : ", m
+OKU "Ders sayısı : ", k
+EĞER m < 1 VEYA k < 1 İSE GİT @hata
+@dis: EĞER ogr > m İSE GİT @son         # dış döngü: öğrenciler
+YAZ ogr, ". öğrencinin notlarını girin:"
+toplam = 0
+ders = 1
+@ic: EĞER ders > k İSE GİT @icson       # iç döngü: dersler
+OKU "  Not : ", puan
+toplam += puan
+ders++
+GİT @ic
+@icson: ort = toplam / k
+YAZ ogr, ". öğrenci ortalaması : ", ort
+EĞER ort >= 50 İSE gecen++
+ogr++
+GİT @dis
+@son: YAZ m, " öğrenciden ", gecen, " tanesi geçti."
+BİTİR
+@hata: YAZ "Öğrenci ve ders sayısı en az 1 olmalı."
+BİTİR

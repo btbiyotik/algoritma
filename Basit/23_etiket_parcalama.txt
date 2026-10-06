@@ -1,0 +1,12 @@
+# PARÇALA örneği 1: Virgülle ayrılmış ürün listesini diziye dönüştürme
+BAŞLA
+METİN girdi
+METİNDİZİSİ urunler[1]
+TAMSAYI i = 0
+OKU "Ürünleri virgülle ayırarak yazın : ", girdi
+PARÇALA urunler, girdi, ","
+YAZ DİZİBOYUTU urunler, " ürün girildi:"
+TEKRARLA yazdir, @a, @b, DİZİBOYUTU urunler
+@a: YAZ i + 1, ". ", urunler[i]
+@b: i++
+BİTİR

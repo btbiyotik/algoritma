@@ -1,0 +1,12 @@
+# Örnek 13: Metni harf harf yazdırma ve sesli harfleri sayma (küçük harfle yazın)
+BAŞLA
+METİN cumle, sesliler = "aeıioöuü"
+TAMSAYI i = 0, sesli = 0
+OKU "Bir kelime yazın : ", cumle
+@dongu: EĞER i >= UZUNLUK cumle İSE GİT @son   # metnin sonuna gelinince dur
+YAZ i, ". karakter : ", cumle[i]
+EĞER cumle[i] İÇİNDEMİ sesliler İSE sesli++
+i++
+GİT @dongu
+@son: YAZ "Sesli harf sayısı : ", sesli
+BİTİR

@@ -1,0 +1,23 @@
+# Örnek 17: Ortalanmış sayı piramidi - bir satırda üç ayrı iç döngü
+BAŞLA
+TAMSAYI n, i = 1, j
+METİN satir
+OKU "Kaç satır (1-9)? ", n
+EĞER n < 1 VEYA n > 9 İSE GİT @hata
+İKEN dis, @d1, @d9, i <= n
+@d1: satir = ""
+TEKRARLA bosluk, @b1, @b1, n - i         # 1) soldaki boşluklar
+@b1: satir = satir + " "
+j = 1
+TEKRARLA artan, @c1, @c2, i              # 2) 1'den i'ye artan rakamlar
+@c1: satir = satir + METNEÇEVİR j
+@c2: j++
+j = i - 1
+TEKRARLA azalan, @e1, @e2, i - 1         # 3) i-1'den 1'e azalan rakamlar
+@e1: satir = satir + METNEÇEVİR j
+@e2: j--
+YAZ satir
+@d9: i++
+BİTİR
+@hata: YAZ "1 ile 9 arasında bir sayı girin."
+BİTİR

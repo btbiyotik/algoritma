@@ -1,0 +1,21 @@
+# Örnek 15: 2'den N'ye asal sayılar - bölen bulununca iç döngü DÖNGÜYÜKIR ile kırılır
+BAŞLA
+TAMSAYI n, sayi = 2, b, adet = 0
+MANTIK asal
+OKU "Kaça kadar asal sayılar yazılsın? ", n
+EĞER n < 2 İSE GİT @hata
+İKEN dis, @d1, @d9, sayi <= n            # dış döngü: aday sayılar
+@d1: asal = DOĞRU
+b = 2
+İKEN ic, @i1, @i5, b * b <= sayi         # iç döngü: bölen ara
+@i1: EĞER sayi % b != 0 İSE GİT @i5
+asal = YANLIŞ                            # bölen bulundu, asal değil
+DÖNGÜYÜKIR ic                            # aramaya devam etmeye gerek yok
+@i5: b++
+EĞER asal İSE YAZ sayi
+EĞER asal İSE adet++
+@d9: sayi++
+YAZ "Toplam ", adet, " asal sayı bulundu."
+BİTİR
+@hata: YAZ "N en az 2 olmalı."
+BİTİR

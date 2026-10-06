@@ -1,0 +1,11 @@
+# BİRLEŞTİR örneği 1: Sepetteki ürünleri tek bir fiş metninde birleştirme
+BAŞLA
+METİNDİZİSİ sepet[3]
+TAMSAYI i = 0
+METİN fis
+TEKRARLA giris, @a, @b, 3
+@a: OKU "Ürün : ", sepet[i]
+@b: i++
+fis = BİRLEŞTİR sepet, ", "
+YAZ "Sepetiniz : ", fis
+BİTİR

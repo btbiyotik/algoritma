@@ -1,0 +1,19 @@
+# Örnek 9: N sayı içinden en büyük ve en küçük sayıyı bulma
+BAŞLA
+TAMSAYI n, i = 2, sayi, maksimum, minimum
+OKU "Kaç sayı girilecek? ", n
+EĞER n < 1 İSE GİT @hata
+OKU "Sayı : ", sayi
+maksimum = sayi                          # ilk sayı hem en büyük hem en küçük kabul edilir
+minimum = sayi
+@dongu: EĞER i > n İSE GİT @son
+OKU "Sayı : ", sayi
+EĞER sayi > maksimum İSE maksimum = sayi
+EĞER sayi < minimum İSE minimum = sayi
+i++
+GİT @dongu
+@son: YAZ "En büyük : ", maksimum
+YAZ "En küçük : ", minimum
+BİTİR
+@hata: YAZ "En az 1 sayı girmelisiniz."
+BİTİR

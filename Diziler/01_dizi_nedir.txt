@@ -1,0 +1,12 @@
+# Örnek 1: Dizi nedir? 5 notu tek bir dizide saklama ve geri okuma
+BAŞLA
+TAMSAYIDİZİSİ notlar[5]                  # 5 elemanlı dizi: notlar[0] ... notlar[4]
+TAMSAYI i = 0                            # i: dizinin indeksi (sıra numarası)
+YAZ "5 öğrencinin notunu girin."
+TEKRARLA giris, @a1, @a2, 5              # 5 kez tekrarla
+@a1: OKU "Not : ", notlar[i]             # i. elemana oku
+@a2: i++                                 # sonraki elemana geç
+YAZ "5 öğrencinin girdiği notlar :"
+DİZİYAZDIR notlar
+YAZ "İlk eleman : ", notlar[0], "   Son eleman : ", notlar[4]
+BİTİR

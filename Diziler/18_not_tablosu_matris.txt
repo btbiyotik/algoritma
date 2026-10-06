@@ -1,0 +1,30 @@
+# Örnek 18: Tek boyutlu dizide tablo (matris) tutma - indeks = satır * 3 + sütun
+BAŞLA
+TAMSAYIDİZİSİ puan[9]                    # 3 öğrenci x 3 sınav = 9 eleman
+TAMSAYI ogr = 0, sinav, toplam
+TEKRARLA ogrenciler, @a1, @a9, 3         # dış döngü: öğrenci
+@a1: sinav = 0
+YAZ ogr + 1, ". öğrencinin 3 sınav notunu girin:"
+TEKRARLA sinavlar, @b1, @b2, 3           # iç döngü: sınav
+@b1: OKU "  Not : ", puan[ogr * 3 + sinav]
+@b2: sinav++
+@a9: ogr++
+ogr = 0
+TEKRARLA satirort, @c1, @c9, 3           # her öğrencinin ortalaması (satır ortalaması)
+@c1: toplam = 0
+sinav = 0
+TEKRARLA topla1, @d1, @d2, 3
+@d1: toplam += puan[ogr * 3 + sinav]
+@d2: sinav++
+YAZ ogr + 1, ". öğrenci ortalaması : ", toplam / 3
+@c9: ogr++
+sinav = 0
+TEKRARLA sutunort, @e1, @e9, 3           # her sınavın sınıf ortalaması (sütun ortalaması)
+@e1: toplam = 0
+ogr = 0
+TEKRARLA topla2, @f1, @f2, 3
+@f1: toplam += puan[ogr * 3 + sinav]
+@f2: ogr++
+YAZ sinav + 1, ". sınavın sınıf ortalaması : ", toplam / 3
+@e9: sinav++
+BİTİR

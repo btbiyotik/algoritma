@@ -1,0 +1,15 @@
+# DİZİKOPYALA örneği 1: Orijinal listeyi bozmadan üzerinde deneme yapmak için yedek alma
+BAŞLA
+TAMSAYIDİZİSİ orijinal[4]
+TAMSAYIDİZİSİ yedek[4]
+TAMSAYI i = 0
+TEKRARLA giris, @a, @b, 4
+@a: OKU "Sayı : ", orijinal[i]
+@b: i++
+DİZİKOPYALA orijinal, yedek
+DİZİSIRALA yedek, DOĞRU
+YAZ "Orijinal (değişmedi) :"
+DİZİYAZDIR orijinal
+YAZ "Yedek (sıralanmış) :"
+DİZİYAZDIR yedek
+BİTİR

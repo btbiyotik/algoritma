@@ -1,0 +1,11 @@
+BAŞLA
+METİN cumle, harf
+TAMSAYI i = 0, adet = 0
+OKU "Bir cümle yazın : ", cumle
+OKU "Sayılacak harf : ", harf
+EĞER i >= UZUNLUK cumle İSE GİT 10
+EĞER cumle[i] == harf İSE adet++
+i++
+GİT 6
+YAZ "'", harf, "' harfi ", adet, " kez geçiyor."
+BİTİR

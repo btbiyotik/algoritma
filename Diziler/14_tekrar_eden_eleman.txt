@@ -1,0 +1,21 @@
+# Örnek 14: Dizide tekrar eden sayı var mı? İç içe döngü ve iki döngüyü de kırma
+BAŞLA
+TAMSAYIDİZİSİ d[6]
+TAMSAYI i = 0, j
+MANTIK bulundu = YANLIŞ
+TEKRARLA giris, @a1, @a2, 6
+@a1: OKU "Sayı : ", d[i]
+@a2: i++
+i = 0
+TEKRARLA dis, @d1, @d9, 5                # dış döngü: her eleman
+@d1: j = i + 1
+İKEN ic, @i1, @i5, j < 6                 # iç döngü: kendinden sonraki elemanlar
+@i1: EĞER d[i] != d[j] İSE GİT @i5
+YAZ d[i], " sayısı ", i, ". ve ", j, ". indekste tekrar ediyor."
+bulundu = DOĞRU
+DÖNGÜYÜKIR ic                            # iç döngüyü kır
+@i5: j++
+EĞER bulundu İSE DÖNGÜYÜKIR dis          # dış döngüyü de kır
+@d9: i++
+EĞER bulundu İSE YAZ "Dizide tekrar eden sayı var." DEĞİLSE YAZ "Bütün sayılar birbirinden farklı."
+BİTİR

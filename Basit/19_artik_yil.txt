@@ -1,0 +1,5 @@
+BAŞLA
+TAMSAYI yil
+OKU "Yıl : ", yil
+EĞER (yil % 4 == 0 VE yil % 100 != 0) VEYA yil % 400 == 0 İSE YAZ yil, " artık yıldır (Şubat 29 gün çeker)." DEĞİLSE YAZ yil, " artık yıl değildir."
+BİTİR

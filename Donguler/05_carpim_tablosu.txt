@@ -1,0 +1,9 @@
+# Örnek 5: Girilen sayının çarpım tablosu
+BAŞLA
+TAMSAYI sayi, i = 1
+OKU "Hangi sayının çarpım tablosu? ", sayi
+@dongu: EĞER i > 10 İSE GİT @son
+YAZ sayi, " x ", i, " = ", sayi * i
+i++
+GİT @dongu
+@son: BİTİR

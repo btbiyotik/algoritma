@@ -1,0 +1,14 @@
+BAŞLA
+METİN sifre = "Okul2024", giris
+TAMSAYI hak = 3
+MANTIK eslesti = YANLIŞ
+OKU "Şifre : ", giris
+eslesti = giris == sifre
+EĞER eslesti İSE GİT 13
+hak--
+YAZ "Yanlış şifre! Kalan hak : ", hak
+EĞER hak > 0 İSE GİT 5
+YAZ "Hakkınız bitti. Hesap kilitlendi."
+BİTİR
+YAZ "Giriş başarılı. Hoş geldiniz!"
+BİTİR

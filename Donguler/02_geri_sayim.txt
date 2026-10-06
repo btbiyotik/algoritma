@@ -1,0 +1,10 @@
+# Örnek 2: Geri sayım (sayaç azalır)
+BAŞLA
+TAMSAYI i
+OKU "Kaçtan geriye sayılsın? ", i
+@dongu: EĞER i < 1 İSE GİT @son
+YAZ i
+i--                                     # sayaç 1 azalır
+GİT @dongu
+@son: YAZ "Ateş!"
+BİTİR

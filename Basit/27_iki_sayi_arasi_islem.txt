@@ -1,0 +1,9 @@
+# ENBÜYÜK/ENKÜÇÜK örneği 1: İki sayının büyüğünü ve küçüğünü bulup farkını hesaplama
+BAŞLA
+TAMSAYI a, b, buyuk, kucuk
+OKU "1. sayı : ", a
+OKU "2. sayı : ", b
+buyuk = ENBÜYÜK a, b
+kucuk = ENKÜÇÜK a, b
+YAZ "Büyük : ", buyuk, "   Küçük : ", kucuk, "   Fark : ", buyuk - kucuk
+BİTİR

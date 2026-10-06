@@ -1,0 +1,19 @@
+# Örnek 11: Doğrusal arama - ilk bulunanda DÖNGÜYÜKIR ile durma, adım sayısını sayma
+BAŞLA
+METİNDİZİSİ sehirler[5]
+METİN aranan
+TAMSAYI i = 0, adim = 0, konum = -1
+sehirler[0] = "Ankara"
+sehirler[1] = "İzmir"
+sehirler[2] = "Adana"
+sehirler[3] = "Bursa"
+sehirler[4] = "Konya"
+OKU "Aranan şehir : ", aranan
+TEKRARLA arama, @b1, @b5, 5
+@b1: adim++                              # kaç eleman kontrol edildi?
+EĞER sehirler[i] != aranan İSE GİT @b5
+konum = i
+DÖNGÜYÜKIR arama                         # bulundu: kalan elemanlara bakmaya gerek yok
+@b5: i++
+EĞER konum == -1 İSE YAZ aranan, " listede yok. (", adim, " karşılaştırma)" DEĞİLSE YAZ aranan, " ", konum, ". indekste bulundu. (", adim, " adımda)"
+BİTİR

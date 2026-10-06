@@ -1,0 +1,12 @@
+BAŞLA
+TAMSAYI n, b = 2
+OKU "Bir sayı girin : ", n
+EĞER n < 2 İSE GİT 11
+EĞER b * b > n İSE GİT 9
+EĞER n % b == 0 İSE GİT 11
+b++
+GİT 5
+YAZ n, " asal bir sayıdır."
+BİTİR
+YAZ n, " asal sayı değildir."
+BİTİR

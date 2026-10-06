@@ -1,0 +1,14 @@
+# Örnek 6: Üs alma - tekrarlı çarpma ile taban üssü üs
+BAŞLA
+TAMSAYI taban, us, sayac = 1, sonuc = 1
+OKU "Taban : ", taban
+OKU "Üs (0 veya pozitif) : ", us
+EĞER us < 0 İSE GİT @hata
+@dongu: EĞER sayac > us İSE GİT @son
+sonuc *= taban                          # her turda tabanla çarpılır
+sayac++
+GİT @dongu
+@son: YAZ taban, " üzeri ", us, " = ", sonuc
+BİTİR
+@hata: YAZ "Üs negatif olamaz."
+BİTİR

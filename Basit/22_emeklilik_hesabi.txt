@@ -1,0 +1,7 @@
+# BUYIL örneği 2: Emekliliğe kaç yıl kaldığını hesaplama
+BAŞLA
+TAMSAYI dogum, emeklilik_yasi = 65, kalan
+OKU "Doğum yılınız : ", dogum
+kalan = dogum + emeklilik_yasi - BUYIL
+EĞER kalan <= 0 İSE YAZ "Emeklilik yaşına ulaştınız!" DEĞİLSE YAZ "Emekliliğe ", kalan, " yıl kaldı."
+BİTİR

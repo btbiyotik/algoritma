@@ -1,0 +1,6 @@
+BAŞLA
+TAMSAYI sayi
+OKU "Bir tamsayı girin : ", sayi
+EĞER sayi == 0 İSE YAZ "Sayı sıfırdır." DEĞİLSE EĞER sayi > 0 İSE YAZ "Sayı pozitiftir." DEĞİLSE YAZ "Sayı negatiftir."
+EĞER sayi % 2 == 0 İSE YAZ "Çift sayıdır." DEĞİLSE YAZ "Tek sayıdır."
+BİTİR

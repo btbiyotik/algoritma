@@ -1,0 +1,11 @@
+BAŞLA
+METİN yazi, ters = ""
+TAMSAYI i
+OKU "Bir metin yazın : ", yazi
+i = UZUNLUK yazi - 1
+EĞER i < 0 İSE GİT 10
+ters = ters + yazi[i]
+i--
+GİT 6
+YAZ "Ters hali : ", ters
+BİTİR

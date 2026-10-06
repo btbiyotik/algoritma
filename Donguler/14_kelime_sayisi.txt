@@ -1,0 +1,12 @@
+# Örnek 14: Cümledeki kelime sayısı (arka arkaya boşluklar sorun olmaz)
+BAŞLA
+METİN cumle
+TAMSAYI i = 0, kelime = 0
+OKU "Bir cümle yazın : ", cumle
+@dongu: EĞER i >= UZUNLUK cumle İSE GİT @son
+EĞER cumle[i] == " " İSE GİT @artir            # boşluksa atla
+EĞER i == 0 VEYA cumle[i - 1] == " " İSE kelime++   # kelimenin ilk harfi
+@artir: i++
+GİT @dongu
+@son: YAZ "Kelime sayısı : ", kelime
+BİTİR

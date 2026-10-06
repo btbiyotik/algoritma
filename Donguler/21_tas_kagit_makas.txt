@@ -1,0 +1,28 @@
+# Taş, Kağıt, Makas - kullanıcı bilgisayara karşı istediği kadar tur oynar, skor tutulur
+BAŞLA
+TAMSAYI kskor = 0, bskor = 0, berabere = 0, bilgisayar, tur = 0, sonuc
+METİN secim, ilk, bilg_ilk, devam = "e"
+İKEN oyun, @a, @b, devam == "e"
+@a: EKRANITEMİZLE
+tur++
+YAZ "===== TAŞ, KAĞIT, MAKAS - Tur ", tur, " ====="
+YAZ "Skor -> Sen: ", kskor, "   Bilgisayar: ", bskor, "   Berabere: ", berabere
+OKU "Taş(T) / Kağıt(K) / Makas(M) : ", secim
+ilk = KÜÇÜKHARF secim[0]
+EĞER ilk != "t" VE ilk != "k" VE ilk != "m" İSE YAZ "Geçersiz seçim! T, K ya da M girmelisiniz." DEĞİLSE GİT @oyna
+GİT @sor
+@oyna: bilgisayar = RASTGELE 1, 3
+EĞER bilgisayar == 1 İSE bilg_ilk = "t" DEĞİLSE EĞER bilgisayar == 2 İSE bilg_ilk = "k" DEĞİLSE bilg_ilk = "m"
+EĞER bilg_ilk == "t" İSE YAZ "Bilgisayar : Taş" DEĞİLSE EĞER bilg_ilk == "k" İSE YAZ "Bilgisayar : Kağıt" DEĞİLSE YAZ "Bilgisayar : Makas"
+EĞER ilk == bilg_ilk İSE sonuc = 0 DEĞİLSE EĞER (ilk == "t" VE bilg_ilk == "m") VEYA (ilk == "k" VE bilg_ilk == "t") VEYA (ilk == "m" VE bilg_ilk == "k") İSE sonuc = 1 DEĞİLSE sonuc = -1
+EĞER sonuc == 0 İSE YAZ "Berabere!" DEĞİLSE EĞER sonuc == 1 İSE YAZ "Kazandınız!" DEĞİLSE YAZ "Bilgisayar kazandı!"
+EĞER sonuc == 0 İSE berabere++ DEĞİLSE EĞER sonuc == 1 İSE kskor++ DEĞİLSE bskor++
+@sor: OKU "Tekrar oynamak için 'e', çıkmak için başka bir tuş : ", devam
+devam = KÜÇÜKHARF devam
+@b: PAS
+EKRANITEMİZLE
+YAZ "===== OYUN BİTTİ ====="
+YAZ "Toplam ", tur, " tur oynandı."
+YAZ "Sen : ", kskor, "   Bilgisayar : ", bskor, "   Berabere : ", berabere
+EĞER kskor > bskor İSE YAZ "Tebrikler, genel skorda öndesiniz!" DEĞİLSE EĞER kskor < bskor İSE YAZ "Bilgisayar önde, bir dahakine daha iyi olacak!" DEĞİLSE YAZ "Genel skor berabere!"
+BİTİR

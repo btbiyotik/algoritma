@@ -1,0 +1,18 @@
+# Örnek 4: Sınıf yoklaması - DİZİDOLDUR ve DÖNGÜYÜKIR ile sonsuz döngüden çıkma
+BAŞLA
+METİNDİZİSİ yoklama[6]
+TAMSAYI no, i = 0, gelen = 0
+DİZİDOLDUR yoklama, "Yok"                # başlangıçta herkes "Yok"
+YAZ "Gelen öğrencinin numarasını girin (1-6). Bitirmek için 0."
+İKEN yokla, @a1, @a5, DOĞRU              # şart hep DOĞRU: döngüden yalnızca DÖNGÜYÜKIR ile çıkılır
+@a1: OKU "Numara : ", no
+EĞER no == 0 İSE DÖNGÜYÜKIR yokla        # 0 girilince döngüyü kır
+EĞER no < 1 VEYA no > 6 İSE GİT @a5      # geçersiz numarayı atla
+yoklama[no - 1] = "Var"                  # numara 1'den, indeks 0'dan başlar
+@a5: PAS
+TEKRARLA liste, @b1, @b3, 6
+@b1: YAZ i + 1, ". öğrenci : ", yoklama[i]
+EĞER yoklama[i] == "Var" İSE gelen++
+@b3: i++
+YAZ "Derse gelen : ", gelen, "   Gelmeyen : ", DİZİBOYUTU yoklama - gelen
+BİTİR

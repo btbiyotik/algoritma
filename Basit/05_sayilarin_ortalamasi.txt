@@ -1,0 +1,15 @@
+BAŞLA
+TAMSAYI n, i = 1, sayi, toplam = 0
+ONDALIK ortalama
+OKU "Kaç sayı girilecek? ", n
+EĞER n <= 0 İSE GİT 14
+EĞER i > n İSE GİT 11
+OKU "Sayı : ", sayi
+toplam += sayi
+i++
+GİT 6
+ortalama = toplam / n
+YAZ "Toplam : ", toplam, "   Ortalama : ", ortalama
+BİTİR
+YAZ "Sayı adedi pozitif olmalıdır."
+BİTİR

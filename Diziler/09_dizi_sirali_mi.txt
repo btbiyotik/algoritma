@@ -1,0 +1,16 @@
+# Örnek 9: Dizi sıralı mı? Bayrak değişkeni ve DÖNGÜYÜKIR ile erken çıkış
+BAŞLA
+TAMSAYIDİZİSİ d[6]
+TAMSAYI i = 0
+MANTIK sirali = DOĞRU                    # bayrak: bozan bir çift bulunana kadar "sıralı" kabul et
+TEKRARLA giris, @a1, @a2, 6
+@a1: OKU "Sayı : ", d[i]
+@a2: i++
+i = 0
+TEKRARLA kontrol, @b1, @b4, 5            # 6 elemanda 5 komşu çift vardır
+@b1: EĞER d[i] <= d[i + 1] İSE GİT @b4
+sirali = YANLIŞ                          # sırayı bozan çift bulundu
+DÖNGÜYÜKIR kontrol                       # geri kalanına bakmaya gerek yok
+@b4: i++
+EĞER sirali İSE YAZ "Dizi küçükten büyüğe sıralı." DEĞİLSE YAZ "Sıralı değil! Sırayı bozan yer : ", i, ". ve ", i + 1, ". indeks"
+BİTİR

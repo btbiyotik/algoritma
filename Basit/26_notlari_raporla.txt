@@ -1,0 +1,15 @@
+# BİRLEŞTİR örneği 2: Sayı dizisini rapor için tek satırda gösterme (PARÇALA ile tersini de deneyelim)
+BAŞLA
+TAMSAYIDİZİSİ notlar[4]
+TAMSAYI i = 0
+METİN rapor, kontrol
+METİNDİZİSİ parcalar[1]
+TEKRARLA giris, @a, @b, 4
+@a: OKU "Not : ", notlar[i]
+@b: i++
+DİZİSIRALA notlar, DOĞRU
+rapor = BİRLEŞTİR notlar, " - "
+YAZ "Sıralı notlar : ", rapor
+PARÇALA parcalar, rapor, " - "
+YAZ "Ayrıştırılan parça sayısı (doğrulama) : ", DİZİBOYUTU parcalar
+BİTİR

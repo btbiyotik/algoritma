@@ -1,0 +1,13 @@
+BAŞLA
+TAMSAYI gizli = 37, tahmin, deneme = 0
+YAZ "1 ile 100 arasında bir sayı tuttum. Bul bakalım!"
+OKU "Tahmininiz : ", tahmin
+deneme++
+EĞER tahmin == gizli İSE GİT 10
+EĞER tahmin < gizli İSE YAZ "Daha büyük bir sayı söyleyin." DEĞİLSE YAZ "Daha küçük bir sayı söyleyin."
+EĞER deneme >= 7 İSE GİT 12
+GİT 4
+YAZ "Tebrikler! ", deneme, " denemede buldunuz."
+BİTİR
+YAZ "Hakkınız bitti. Tuttuğum sayı ", gizli, " idi."
+BİTİR

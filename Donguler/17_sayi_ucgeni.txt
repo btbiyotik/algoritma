@@ -1,0 +1,19 @@
+# Örnek 17: İÇ İÇE DÖNGÜ - Sayı üçgeni (1, 12, 123 ...) en fazla 9 satır
+BAŞLA
+METİN rakamlar = "123456789", satir
+TAMSAYI n, i = 1, j
+OKU "Kaç satır (1-9)? ", n
+EĞER n < 1 VEYA n > 9 İSE GİT @hata
+@dis: EĞER i > n İSE GİT @son
+satir = ""
+j = 1
+@ic: EĞER j > i İSE GİT @icson
+satir = satir + rakamlar[j - 1]         # j. rakamı metinden al
+j++
+GİT @ic
+@icson: YAZ satir
+i++
+GİT @dis
+@son: BİTİR
+@hata: YAZ "1 ile 9 arasında bir sayı girin."
+BİTİR

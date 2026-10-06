@@ -1,0 +1,26 @@
+# Örnek 5: Sayaç dizisi ve histogram - iç içe döngü (iç döngünün tekrar sayısı diziden gelir)
+BAŞLA
+TAMSAYIDİZİSİ sayac[6]                   # sayac[0]: kaç kez 1 geldi ... sayac[5]: kaç kez 6 geldi
+TAMSAYI atis = 1, zar, k
+METİN cubuk
+YAZ "10 zar atışının sonucunu girin (1-6)."
+İKEN at, @a1, @a5, atis <= 10
+@a1: OKU "Zar : ", zar
+EĞER zar >= 1 VE zar <= 6 İSE GİT @a3
+YAZ "Geçersiz zar! 1 ile 6 arasında girin."
+GİT @a5
+@a3: sayac[zar - 1]++                    # ilgili yüzün sayacını 1 artır
+atis++
+@a5: PAS
+zar = 1
+YAZ "----- Histogram -----"
+TEKRARLA yuzler, @b1, @b5, 6             # dış döngü: zarın her yüzü
+@b1: cubuk = ""
+k = 1
+TEKRARLA yildiz, @c1, @c2, sayac[zar - 1]   # iç döngü: o yüzün sayısı kadar yıldız
+@c1: cubuk = cubuk + "*"
+@c2: k++
+YAZ zar, " : ", cubuk, " (", sayac[zar - 1], ")"
+@b5: zar++
+DİZİSİL sayac                            # işimiz bitti: diziyi bellekten sil
+BİTİR

@@ -1,0 +1,17 @@
+# Örnek 6: DİZİSIRALA - artan / azalan sıralama, en küçük, en büyük ve ortanca
+BAŞLA
+TAMSAYIDİZİSİ d[5]
+TAMSAYI i = 0, secim
+MANTIK artan
+TEKRARLA giris, @a1, @a2, 5
+@a1: OKU "Sayı : ", d[i]
+@a2: i++
+OKU "Küçükten büyüğe için 1, büyükten küçüğe için 2 : ", secim
+artan = secim == 1                       # karşılaştırmanın sonucu DOĞRU/YANLIŞ olur
+DİZİSIRALA d, artan
+YAZ "Sıralı dizi :"
+DİZİYAZDIR d
+DİZİSIRALA d, DOĞRU                      # artan sıraya getir
+YAZ "En küçük : ", d[0], "   En büyük : ", d[DİZİBOYUTU d - 1]
+YAZ "Ortanca (medyan) : ", d[DİZİBOYUTU d // 2]
+BİTİR

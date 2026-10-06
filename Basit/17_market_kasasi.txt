@@ -1,0 +1,14 @@
+BAŞLA
+TAMSAYI fiyat, toplam = 0, adet = 0
+YAZ "Ürün fiyatlarını girin (bitirmek için 0)."
+OKU "Fiyat : ", fiyat
+EĞER fiyat == 0 İSE GİT 12
+EĞER fiyat > 0 İSE GİT 9
+YAZ "Fiyat negatif olamaz!"
+GİT 4
+toplam += fiyat
+adet++
+GİT 4
+YAZ adet, " ürün, ara toplam : ", toplam, " TL"
+EĞER toplam >= 500 İSE YAZ "500 TL üzeri %10 indirim! Ödenecek : ", toplam - toplam // 10, " TL" DEĞİLSE YAZ "Ödenecek : ", toplam, " TL"
+BİTİR

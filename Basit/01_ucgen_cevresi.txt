@@ -1,0 +1,8 @@
+BAŞLA
+TAMSAYI a, b, c, cevre
+OKU "A kenarı : ", a
+OKU "B kenarı : ", b
+OKU "C kenarı : ", c
+cevre = a + b + c
+YAZ "Üçgenin çevresi : ", cevre
+BİTİR

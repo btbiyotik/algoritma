@@ -1,0 +1,14 @@
+BAŞLA
+METİN sifre
+TAMSAYI puan = 0, i = 0, rakam = 0
+OKU "Yeni şifre : ", sifre
+EĞER UZUNLUK sifre >= 8 İSE puan++
+EĞER i >= UZUNLUK sifre İSE GİT 10
+EĞER sifre[i] >= "0" VE sifre[i] <= "9" İSE rakam++
+i++
+GİT 6
+EĞER rakam > 0 İSE puan++
+EĞER " " İÇİNDEMİ sifre İSE YAZ "Uyarı: Şifrede boşluk olmamalı." DEĞİLSE PAS
+YAZ "Güvenlik puanı (2 üzerinden) : ", puan
+EĞER puan == 2 İSE YAZ "Güçlü şifre." DEĞİLSE EĞER puan == 1 İSE YAZ "Orta güçte şifre." DEĞİLSE YAZ "Zayıf şifre."
+BİTİR

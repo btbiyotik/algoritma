@@ -1,0 +1,16 @@
+# PARÇALA örneği 2: Bir cümleyi kelimelere ayırıp en uzun kelimeyi bulma
+BAŞLA
+METİN cumle
+METİNDİZİSİ kelimeler[1]
+TAMSAYI i = 0, enuzun_uzunluk = 0
+METİN enuzun = ""
+OKU "Bir cümle yazın : ", cumle
+PARÇALA kelimeler, cumle, " "
+TEKRARLA tara, @a, @c, DİZİBOYUTU kelimeler
+@a: EĞER UZUNLUK kelimeler[i] <= enuzun_uzunluk İSE GİT @c
+enuzun_uzunluk = UZUNLUK kelimeler[i]
+enuzun = kelimeler[i]
+@c: i++
+YAZ "Cümledeki kelime sayısı : ", DİZİBOYUTU kelimeler
+YAZ "En uzun kelime : ", enuzun, " (", enuzun_uzunluk, " harf)"
+BİTİR

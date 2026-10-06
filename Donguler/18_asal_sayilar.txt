@@ -1,0 +1,16 @@
+# Örnek 18: İÇ İÇE DÖNGÜ - 2'den N'ye kadar tüm asal sayılar
+BAŞLA
+TAMSAYI n, sayi = 2, b, adet = 0
+OKU "Kaça kadar asal sayılar yazılsın? ", n
+@dis: EĞER sayi > n İSE GİT @son        # dış döngü: aday sayılar
+b = 2
+@ic: EĞER b * b > sayi İSE GİT @asal    # iç döngü: bölen arama
+EĞER sayi % b == 0 İSE GİT @sonraki     # bölen bulundu, asal değil
+b++
+GİT @ic
+@asal: YAZ sayi
+adet++
+@sonraki: sayi++
+GİT @dis
+@son: YAZ "Toplam ", adet, " asal sayı bulundu."
+BİTİR

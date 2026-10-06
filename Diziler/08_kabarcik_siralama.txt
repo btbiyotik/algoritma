@@ -1,0 +1,22 @@
+# Örnek 8: Kabarcık sıralaması (Bubble Sort) - iç içe döngü, çoklu atamayla takas, her turun sonucu gösterilir
+BAŞLA
+TAMSAYIDİZİSİ d[6]
+TAMSAYI n, tur = 1, j
+d[0] = 64
+d[1] = 25
+d[2] = 12
+d[3] = 22
+d[4] = 11
+d[5] = 90
+n = DİZİBOYUTU d
+TEKRARLA turlar, @d1, @d9, n - 1         # n elemanlı dizi için en fazla n-1 tur yeter
+@d1: j = 0
+TEKRARLA komsu, @i1, @i5, n - tur        # komşuları karşılaştır (her turda bir eleman daha az)
+@i1: EĞER d[j] <= d[j + 1] İSE GİT @i5   # sıra doğruysa takas yapma
+d[j], d[j + 1] = d[j + 1], d[j]          # tampon değişken kullanmadan takas
+@i5: j++
+YAZ tur, ". tur sonrası :"
+DİZİYAZDIR d
+@d9: tur++
+YAZ "Sıralama tamamlandı."
+BİTİR

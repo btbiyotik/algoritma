@@ -1,0 +1,14 @@
+# Örnek 8: Kullanıcı adı ve şifre kontrolü (3 hak)
+BAŞLA
+METİN kadi, sifre
+TAMSAYI hak = 3
+@dene: OKU "Kullanıcı adı : ", kadi
+OKU "Şifre : ", sifre
+EĞER kadi == "ogrenci" VE sifre == "algo123" İSE GİT @basari
+hak--                                   # yanlış girişte hak azalır
+YAZ "Bilgiler hatalı! Kalan hak : ", hak
+EĞER hak > 0 İSE GİT @dene              # hak varsa tekrar dene
+YAZ "Sisteme giriş hakkın yok"
+BİTİR
+@basari: YAZ "Başarıyla giriş yaptın!"
+BİTİR

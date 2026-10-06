@@ -1,0 +1,11 @@
+BAŞLA
+TAMSAYI vize, final
+ONDALIK ortalama
+METİN harf
+OKU "Vize notu : ", vize
+OKU "Final notu : ", final
+ortalama = (vize * 4 + final * 6) / 10
+EĞER ortalama >= 90 İSE harf = "AA" DEĞİLSE EĞER ortalama >= 80 İSE harf = "BA" DEĞİLSE EĞER ortalama >= 70 İSE harf = "BB" DEĞİLSE EĞER ortalama >= 50 İSE harf = "CC" DEĞİLSE harf = "FF"
+YAZ "Ortalama : ", ortalama, "   Harf notu : ", harf
+EĞER ortalama >= 50 İSE YAZ "Dersi geçtiniz." DEĞİLSE YAZ "Dersten kaldınız."
+BİTİR

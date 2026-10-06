@@ -1,0 +1,16 @@
+# Örnek 10: Sayının basamak sayısı ve basamaklar toplamı
+BAŞLA
+TAMSAYI sayi, orj, kalan, toplam = 0, adet = 0
+OKU "Pozitif bir tamsayı : ", sayi
+orj = sayi
+EĞER sayi <= 0 İSE GİT @hata
+@dongu: EĞER sayi == 0 İSE GİT @son
+kalan = sayi % 10                       # son basamak
+toplam += kalan
+adet++
+sayi = sayi // 10                       # son basamağı at
+GİT @dongu
+@son: YAZ orj, " sayısı ", adet, " basamaklı, basamaklar toplamı : ", toplam
+BİTİR
+@hata: YAZ "Pozitif bir tamsayı girmelisiniz."
+BİTİR

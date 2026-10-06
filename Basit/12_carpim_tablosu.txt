@@ -1,0 +1,8 @@
+BAŞLA
+TAMSAYI sayi, i = 1
+OKU "Hangi sayının çarpım tablosu? ", sayi
+EĞER i > 10 İSE GİT 8
+YAZ sayi, " x ", i, " = ", sayi * i
+i++
+GİT 4
+BİTİR

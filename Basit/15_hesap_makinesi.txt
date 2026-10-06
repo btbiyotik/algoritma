@@ -1,0 +1,10 @@
+BAŞLA
+ONDALIK a, b, sonuc = 0
+METİN islem
+MANTIK gecerli = DOĞRU
+OKU "1. sayı : ", a
+OKU "İşlem (+ - * /) : ", islem
+OKU "2. sayı : ", b
+EĞER islem == "+" İSE sonuc = a + b DEĞİLSE EĞER islem == "-" İSE sonuc = a - b DEĞİLSE EĞER islem == "*" İSE sonuc = a * b DEĞİLSE EĞER islem == "/" VE b != 0 İSE sonuc = a / b DEĞİLSE gecerli = YANLIŞ
+EĞER gecerli İSE YAZ a, " ", islem, " ", b, " = ", sonuc DEĞİLSE YAZ "Geçersiz işlem ya da sıfıra bölme!"
+BİTİR

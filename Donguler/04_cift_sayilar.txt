@@ -1,0 +1,11 @@
+# Örnek 4: 2'den N'ye kadar çift sayıları yazdırma (adım 2)
+BAŞLA
+TAMSAYI n, i = 2, toplam = 0
+OKU "Kaça kadar? ", n
+@dongu: EĞER i > n İSE GİT @son
+YAZ i
+toplam += i
+i += 2                                  # sayaç 2'ser artar
+GİT @dongu
+@son: YAZ "Çift sayıların toplamı : ", toplam
+BİTİR

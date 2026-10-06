@@ -1,0 +1,10 @@
+# Örnek 7: 0 girilene kadar sayı alıp toplama (nöbetçi değer)
+BAŞLA
+TAMSAYI sayi, toplam = 0, adet = 0
+@dongu: OKU "Sayı (bitirmek için 0) : ", sayi
+EĞER sayi == 0 İSE GİT @son             # 0 = döngü bitiş işareti
+toplam += sayi
+adet++
+GİT @dongu
+@son: YAZ adet, " sayı girildi, toplam : ", toplam
+BİTİR

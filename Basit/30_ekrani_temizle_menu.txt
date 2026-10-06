@@ -1,0 +1,15 @@
+# EKRANITEMİZLE örneği: Her menü turunda ekranı temizleyip sade bir görünüm sunma
+BAŞLA
+TAMSAYI secim = 0
+İKEN menu, @m1, @m5, secim != 3
+@m1: EKRANITEMİZLE
+YAZ "===== ANA MENÜ ====="
+YAZ "1) Selam ver"
+YAZ "2) Tarih bilgisi"
+YAZ "3) Çıkış"
+OKU "Seçiminiz : ", secim
+EĞER secim == 1 İSE YAZ "Merhaba!"
+EĞER secim == 2 İSE YAZ "Bu yıl : ", BUYIL
+@m5: PAS
+YAZ "Programdan çıkılıyor."
+BİTİR

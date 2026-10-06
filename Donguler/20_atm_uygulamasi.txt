@@ -1,0 +1,38 @@
+# Örnek 20: ATM - PIN için 3 hak, sonra sonsuz menü döngüsü (4 ile çıkış)
+BAŞLA
+TAMSAYI pin = 1234, giris, hak = 3, bakiye = 1000, secim, tutar
+@pin: OKU "PIN : ", giris
+EĞER giris == pin İSE GİT @menu
+hak--
+YAZ "Hatalı PIN! Kalan hak : ", hak
+EĞER hak > 0 İSE GİT @pin
+YAZ "Kartınız bloke edildi."
+BİTİR
+@menu: YAZ "----- MENÜ -----"             # menü döngüsü: 4 seçilene kadar tekrarlanır
+YAZ "1) Bakiye sorgula"
+YAZ "2) Para yatır"
+YAZ "3) Para çek"
+YAZ "4) Çıkış"
+OKU "Seçiminiz : ", secim
+EĞER secim == 1 İSE GİT @bakiye
+EĞER secim == 2 İSE GİT @yatir
+EĞER secim == 3 İSE GİT @cek
+EĞER secim == 4 İSE GİT @cikis
+YAZ "Geçersiz seçim!"
+GİT @menu
+@bakiye: YAZ "Bakiyeniz : ", bakiye, " TL"
+GİT @menu
+@yatir: OKU "Yatırılacak tutar : ", tutar
+EĞER tutar <= 0 İSE GİT @gecersiz
+bakiye += tutar
+YAZ "İşlem tamam. Yeni bakiye : ", bakiye, " TL"
+GİT @menu
+@cek: OKU "Çekilecek tutar : ", tutar
+EĞER tutar <= 0 VEYA tutar > bakiye İSE GİT @gecersiz
+bakiye -= tutar
+YAZ "İşlem tamam. Yeni bakiye : ", bakiye, " TL"
+GİT @menu
+@gecersiz: YAZ "Geçersiz tutar!"
+GİT @menu
+@cikis: YAZ "İyi günler dileriz."
+BİTİR

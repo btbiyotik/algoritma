@@ -1,0 +1,13 @@
+# Örnek 15: İÇ İÇE DÖNGÜ - 1'den 10'a kadar tüm çarpım tabloları
+BAŞLA
+TAMSAYI i = 1, j
+@dis: EĞER i > 10 İSE GİT @son          # dış döngü: hangi tablo
+j = 1                                   # iç döngü her tabloda baştan başlar
+@ic: EĞER j > 10 İSE GİT @icson         # iç döngü: tablonun satırları
+YAZ i, " x ", j, " = ", i * j
+j++
+GİT @ic
+@icson: YAZ "----------"
+i++
+GİT @dis
+@son: BİTİR

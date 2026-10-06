@@ -1,0 +1,14 @@
+BAŞLA
+METİN kelime
+TAMSAYI bas = 0, son
+MANTIK palindrom = DOĞRU
+OKU "Kelime : ", kelime
+son = UZUNLUK kelime - 1
+EĞER bas >= son İSE GİT 13
+EĞER kelime[bas] != kelime[son] İSE palindrom = YANLIŞ
+EĞER palindrom == YANLIŞ İSE GİT 13
+bas++
+son--
+GİT 7
+EĞER palindrom İSE YAZ kelime, " bir palindromdur." DEĞİLSE YAZ kelime, " palindrom değildir."
+BİTİR

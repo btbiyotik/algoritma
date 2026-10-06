@@ -1,0 +1,16 @@
+# Örnek 12: Bir sayının bölenlerini listeleme ve asallık
+BAŞLA
+TAMSAYI sayi, i = 1, adet = 0
+OKU "Pozitif bir sayı : ", sayi
+EĞER sayi < 1 İSE GİT @hata
+@dongu: EĞER i > sayi İSE GİT @son
+EĞER sayi % i != 0 İSE GİT @artir       # bölmüyorsa atla
+YAZ i, " sayıyı tam böler."
+adet++
+@artir: i++
+GİT @dongu
+@son: YAZ "Bölen sayısı : ", adet
+EĞER adet == 2 İSE YAZ sayi, " asal bir sayıdır." DEĞİLSE YAZ sayi, " asal değildir."
+BİTİR
+@hata: YAZ "Pozitif bir sayı girmelisiniz."
+BİTİR

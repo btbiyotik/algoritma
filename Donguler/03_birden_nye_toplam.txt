@@ -1,0 +1,10 @@
+# Örnek 3: 1'den N'ye kadar sayıların toplamı (toplayıcı/akümülatör)
+BAŞLA
+TAMSAYI n, i = 1, toplam = 0
+OKU "N sayısı : ", n
+@dongu: EĞER i > n İSE GİT @son
+toplam += i                             # her turda sayaç toplama eklenir
+i++
+GİT @dongu
+@son: YAZ "1'den ", n, "'e kadar sayıların toplamı : ", toplam
+BİTİR

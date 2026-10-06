@@ -1,0 +1,24 @@
+# Örnek 20: Kelime tahmin oyunu (adam asmaca) - diziler, iç içe döngüler ve DÖNGÜYÜKIR bir arada
+BAŞLA
+METİN kelime = "algoritma", harf, satir
+METİNDİZİSİ g[9]                         # oyuncuya gösterilen harfler
+TAMSAYI hak = 6, i, kactane, bulunan = 0
+DİZİDOLDUR g, "_"
+YAZ "Kelime tahmin oyunu! Kelime ", UZUNLUK kelime, " harfli. Küçük harf kullanın."
+İKEN oyun, @o1, @o9, hak > 0
+@o1: satir = BİRLEŞTİR g, " "
+YAZ satir, "   Kalan hak : ", hak
+OKU "Bir harf girin : ", harf
+kactane = 0
+i = 0
+TEKRARLA tara, @t1, @t3, 9               # harf kelimenin neresinde?
+@t1: EĞER kelime[i] != harf VEYA g[i] != "_" İSE GİT @t3
+g[i] = harf                              # harfi gösterilen diziye yaz
+kactane++
+@t3: i++
+EĞER kactane == 0 İSE hak--              # harf yoksa (ya da zaten bulunduysa) hak azalır
+bulunan += kactane
+EĞER bulunan == 9 İSE DÖNGÜYÜKIR oyun    # bütün harfler bulundu
+@o9: PAS
+EĞER bulunan == 9 İSE YAZ "Tebrikler! Kelime : ", kelime DEĞİLSE YAZ "Hakkınız bitti. Kelime : ", kelime
+BİTİR

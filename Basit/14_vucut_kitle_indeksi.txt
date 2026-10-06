@@ -1,0 +1,10 @@
+BAŞLA
+TAMSAYI boy, kilo, vki
+METİN durum
+OKU "Boyunuz (cm) : ", boy
+OKU "Kilonuz (kg) : ", kilo
+vki = kilo * 100000 // (boy * boy)
+EĞER vki < 185 İSE durum = "Zayıf" DEĞİLSE EĞER vki < 250 İSE durum = "Normal" DEĞİLSE EĞER vki < 300 İSE durum = "Fazla kilolu" DEĞİLSE durum = "Obez"
+YAZ "Vücut kitle indeksi : ", vki // 10, ",", vki % 10
+YAZ "Durum : ", durum
+BİTİR

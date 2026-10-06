@@ -1,0 +1,11 @@
+# BUYIL örneği: Doğum yılından yaş hesaplama
+BAŞLA
+TAMSAYI simdiki_yil, dogum_yili, yas
+simdiki_yil = BUYIL
+OKU "Doğum yılınız : ", dogum_yili
+EĞER dogum_yili > simdiki_yil İSE GİT @hata
+yas = simdiki_yil - dogum_yili
+YAZ simdiki_yil, " yılına göre yaşınız : ", yas
+BİTİR
+@hata: YAZ "Doğum yılı bugünden ileri bir tarih olamaz."
+BİTİR

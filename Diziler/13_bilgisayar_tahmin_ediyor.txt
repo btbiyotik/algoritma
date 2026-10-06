@@ -1,0 +1,19 @@
+# Örnek 13: Bilgisayar, sizin tuttuğunuz sayıyı ikili arama mantığıyla en çok 7 adımda bulur
+BAŞLA
+TAMSAYI alt = 1, ust = 100, tahmin, adim = 0
+METİN cevap
+MANTIK bulundu = YANLIŞ
+YAZ "1 ile 100 arasında bir sayı tutun. Ben bulmaya çalışacağım!"
+İKEN tahminet, @a1, @a9, alt <= ust
+@a1: tahmin = (alt + ust) // 2           # aralığın ortası
+adim++
+YAZ adim, ". tahminim : ", tahmin
+OKU "Sayınız BÜYÜK mü (B), KÜÇÜK mü (K), DOĞRU mu (D)? ", cevap
+EĞER cevap != "D" VE cevap != "d" İSE GİT @a4
+bulundu = DOĞRU
+DÖNGÜYÜKIR tahminet                      # bulundu, tahmin etmeyi bırak
+@a4: EĞER cevap == "B" VEYA cevap == "b" İSE alt = tahmin + 1   # sayı daha büyük: alt sınırı yükselt
+EĞER cevap == "K" VEYA cevap == "k" İSE ust = tahmin - 1        # sayı daha küçük: üst sınırı indir
+@a9: PAS
+EĞER bulundu İSE YAZ "Sayınızı ", adim, " adımda buldum: ", tahmin DEĞİLSE YAZ "Cevaplarınızda tutarsızlık var!"
+BİTİR

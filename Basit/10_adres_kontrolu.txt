@@ -1,0 +1,9 @@
+BAŞLA
+METİN adres
+TAMSAYI konum
+OKU "Adresinizi yazın : ", adres
+konum = "Ankara" ARA adres
+EĞER konum == -1 İSE YAZ "Adreste Ankara geçmiyor." DEĞİLSE YAZ "Ankara, ", konum, ". indeksten itibaren geçiyor."
+EĞER "Mahallesi" İÇİNDEMİ adres İSE YAZ "Mahalle bilgisi var." DEĞİLSE YAZ "Mahalle bilgisi eksik."
+YAZ "Adres ", UZUNLUK adres, " karakter uzunluğunda."
+BİTİR

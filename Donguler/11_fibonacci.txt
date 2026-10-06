@@ -1,0 +1,12 @@
+# Örnek 11: İlk N Fibonacci sayısı
+BAŞLA
+TAMSAYI n, i = 1, a = 0, b = 1, c
+OKU "Kaç terim yazılsın? ", n
+@dongu: EĞER i > n İSE GİT @son
+YAZ a
+c = a + b                               # bir sonraki terim
+a = b
+b = c
+i++
+GİT @dongu
+@son: BİTİR

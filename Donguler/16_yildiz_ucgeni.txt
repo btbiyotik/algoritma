@@ -1,0 +1,16 @@
+# Örnek 16: İÇ İÇE DÖNGÜ - Yıldız üçgeni (dış döngü satır, iç döngü sütun)
+BAŞLA
+TAMSAYI n, i = 1, j
+METİN satir
+OKU "Kaç satır? ", n
+@dis: EĞER i > n İSE GİT @son
+satir = ""                              # her satır boş başlar
+j = 1
+@ic: EĞER j > i İSE GİT @icson          # i. satırda i tane yıldız
+satir = satir + "*"
+j++
+GİT @ic
+@icson: YAZ satir
+i++
+GİT @dis
+@son: BİTİR

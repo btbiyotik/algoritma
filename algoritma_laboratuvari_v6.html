@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algoritma ve Kodlama Laboratuvarı</title>
+<style>
+:root{--bg:#f3f5f8;--pn:#fff;--tx:#1d2733;--mt:#64707d;--bd:#d5dbe3;--ac:#1f6feb;--gr:#1a8754;--rd:#c0392b;--gt:#eef1f5}
+@media(prefers-color-scheme:dark){:root{--bg:#12161b;--pn:#1a2027;--tx:#e6ebf0;--mt:#93a0ad;--bd:#303a45;--ac:#5aa2ff;--gr:#2fae74;--rd:#ff7b6b;--gt:#20272f}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.4 "Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;padding:14px;gap:12px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+h1{margin:0;font-size:24px;color:var(--ac)}
+.bar{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;font-weight:600;padding:7px 14px;border:1px solid var(--bd);border-radius:6px;background:var(--pn);color:var(--tx);cursor:pointer}
+button:hover:not(:disabled){border-color:var(--ac)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+button:disabled{opacity:.45;cursor:default}
+#run{background:var(--gr);border-color:var(--gr);color:#fff}
+#stop{color:var(--rd)}
+main{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:800px){main{grid-template-columns:1fr;grid-auto-rows:minmax(300px,1fr)}}
+section{background:var(--pn);border:1px solid var(--bd);border-radius:8px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+section>h2{margin:0;padding:10px 14px;font-size:15px;border-bottom:1px solid var(--bd)}
+.ed{flex:1;min-height:0;display:flex;font:14px/22px Consolas,"Courier New",monospace}
+#gut{width:46px;padding:10px 8px 24px 0;text-align:right;background:var(--gt);color:var(--mt);overflow:hidden;user-select:none}
+#gut i{display:block;font-style:normal;height:22px}
+#gut i.e{background:var(--rd);color:#fff;font-weight:700}
+#gut i.cur{background:var(--ac);color:#fff;font-weight:700}
+#gut i.stp{background:#e08a1e;color:#fff;font-weight:700}
+.ed-stack{position:relative;flex:1;min-height:0}
+#hl,#ed{position:absolute;inset:0;box-sizing:border-box;margin:0;padding:10px;font:inherit;white-space:pre;overflow:auto;tab-size:4}
+#hl{color:var(--tx);pointer-events:none;background:transparent}
+#hl .kw{color:var(--ac);font-weight:700}
+#hl .gt{color:var(--rd);font-weight:700}
+#hl .str{color:var(--gr)}
+#hl .lbl{color:var(--rd);font-weight:700}
+#ed{border:0;resize:none;background:transparent;color:transparent;caret-color:var(--tx)}
+#ed::selection{background:#3b82f680}
+#term{flex:1;background:#0b0f14;color:#dbe4ee;font:14px/1.6 Consolas,"Courier New",monospace;padding:12px 14px;overflow:auto;min-height:80px}
+#izle{flex:0 0 auto;max-height:38%;display:flex;flex-direction:column;border-top:1px solid var(--bd)}
+#izle.hid{display:none}
+#izle h3{margin:0;padding:8px 14px;font-size:13px;color:var(--mt);background:var(--gt)}
+#izletbl{flex:1;overflow:auto;font:13px/1.4 Consolas,"Courier New",monospace}
+#izletbl table{width:100%;border-collapse:collapse}#izletbl td{padding:4px 10px;border-bottom:1px solid var(--bd);white-space:nowrap;font-family:inherit}
+#izletbl td:first-child{color:var(--ac);font-weight:700}#izletbl td:nth-child(2){color:var(--mt)}#izletbl td:last-child{white-space:normal;word-break:break-all}
+.hiz{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mt);padding:0 4px}
+.hiz input[type=range]{width:110px}
+.ln{white-space:pre-wrap;word-break:break-word}.sys{color:#7d8894;font-style:italic}.er{color:#ff7b6b;font-weight:700}.wr{color:#ffd166}.ok{color:#4ade80}
+.ln.in input{background:#0b0f14;border:0;border-bottom:1px solid #4ade80;color:#4ade80;font:inherit;width:14em;outline:none}
+dialog{max-width:760px;width:92vw;border:1px solid var(--bd);border-radius:10px;background:var(--pn);color:var(--tx);padding:0}
+dialog h3{margin:0;padding:14px 18px;border-bottom:1px solid var(--bd)}
+dialog .c{padding:6px 18px 16px;max-height:70vh;overflow:auto}
+table{border-collapse:collapse;width:100%}td{padding:6px 8px;border-bottom:1px solid var(--bd);vertical-align:top}td:first-child{font-family:Consolas,monospace;white-space:nowrap;color:var(--ac)}
+::backdrop{background:#0008}
+</style>
+</head>
+<body>
+<header>
+  <h1>Algoritma ve Kodlama Laboratuvarı</h1>
+  <div class="bar">
+    <button id="yeni">🆕 Yeni</button><button id="ac">📂 Aç</button><button id="kaydet">💾 Kaydet</button>
+    <button id="run">▶ Çalıştır</button><button id="stop" disabled>■ Durdur</button>
+    <button id="yardim">📘 Komutlar</button>
+    <button id="izlebtn" aria-pressed="false">👁 Değişkenler</button>
+    <label class="hiz">Hız <input type="range" id="hiz" min="0" max="2000" step="10" value="0" aria-label="Çalışma hızı"><span id="hizval">en hızlı</span></label>
+  </div>
+</header>
+<main>
+  <section><h2>1. Türkçe Algoritma (Satır Numaralı)</h2>
+    <div class="ed"><div id="gut" aria-hidden="true"></div><div class="ed-stack"><pre id="hl" aria-hidden="true"></pre><textarea id="ed" spellcheck="false" wrap="off" aria-label="Algoritma"></textarea></div></div>
+  </section>
+  <section><h2>2. Terminal (Çıktı Ekranı)</h2><div id="term" aria-live="polite"></div>
+    <div id="izle" class="hid"><h3>Değişkenler</h3><div id="izletbl"><table><tbody></tbody></table></div></div>
+  </section>
+</main>
+<input type="file" id="dosya" accept=".txt,.alg" hidden>
+<dialog id="dlg"><h3>Komut Rehberi</h3><div class="c">
+<table>
+<tr><td>BAŞLA / BİTİR</td><td>İlk komut BAŞLA, son komut BİTİR olmalıdır. BİTİR çalışınca program durur.</td></tr>
+<tr><td>TAMSAYI a, b = 5</td><td>Tamsayı değişken tanımlar (ilk değer isteğe bağlı, varsayılan 0).</td></tr>
+<tr><td>ONDALIK x = 2.5</td><td>Ondalıklı sayı değişkeni tanımlar.</td></tr>
+<tr><td>METİN ad = "Ali"</td><td>Metin değişkeni tanımlar (tırnak: " veya ').</td></tr>
+<tr><td>MANTIK d = DOĞRU</td><td>DOĞRU / YANLIŞ değeri tutar.</td></tr>
+<tr><td>a = a + 1</td><td>Atama. Ayrıca: a += 1, a -= 1, a *= 2, a /= 2, a++, a--</td></tr>
+<tr><td>a, b = b, a</td><td>Çoklu/eşzamanlı atama. Sağ taraftaki tüm değerler ÖNCE, eski değerlerle hesaplanır; bu yüzden tampon değişken kullanmadan takas yapılabilir. a, b, c = 1, 2, 3 gibi ikiden fazla değişkenle de kullanılabilir.</td></tr>
+<tr><td>OKU "Soru : ", a</td><td>Klavyeden değer alıp değişkene yazar (mesaj isteğe bağlı).</td></tr>
+<tr><td>YAZ "Toplam : ", t</td><td>Metin ve değerleri virgülle ayırarak ekrana yazar.</td></tr>
+<tr><td>EĞER şart İSE komut DEĞİLSE komut</td><td>DEĞİLSE isteğe bağlıdır. DEĞİLSE'den sonra yeni bir EĞER yazılabilir (iç içe EĞER).</td></tr>
+<tr><td>GİT 30</td><td>30. satıra atlar.</td></tr>
+<tr><td>PAS</td><td>Hiçbir şey yapmaz, sonraki satıra geçer.</td></tr>
+<tr><td>UZUNLUK ad</td><td>Metnin karakter sayısını verir.</td></tr>
+<tr><td>ad[0]</td><td>Metnin verilen indeksteki karakteri (ilk karakter 0).</td></tr>
+<tr><td>'Ali' İÇİNDEMİ ad</td><td>ad içinde 'Ali' varsa DOĞRU, yoksa YANLIŞ.</td></tr>
+<tr><td>'Ankara' ARA adres</td><td>Başladığı indeksi verir, yoksa -1.</td></tr>
+<tr><td>+ - * / // % **</td><td>Python'daki öncelikle çalışır; ( ) ile değiştirilir. Metinler + ile birleşir.</td></tr>
+<tr><td>== != &lt; &gt; &lt;= &gt;=</td><td>Karşılaştırma (sayı ve metinler için).</td></tr>
+<tr><td>VE VEYA DEĞİL</td><td>Mantıksal işlemler (and, or, not de kullanılabilir).</td></tr>
+<tr><td>TAMSAYIDİZİSİ a[5]</td><td>5 elemanlı dizi (0-4). Ayrıca ONDALIKDİZİSİ, METİNDİZİSİ, MANTIKDİZİSİ. Kullanım: a[0] = 7, YAZ a[0], OKU "?", a[2]</td></tr>
+<tr><td>DİZİSIRALA a, DOĞRU</td><td>DOĞRU: küçükten büyüğe / A-Z, YANLIŞ: büyükten küçüğe / Z-A. DİZİDOLDUR a, 0 tüm elemanlara değer yazar.</td></tr>
+<tr><td>DİZİBOYUTU a</td><td>Dizinin eleman sayısı (n = DİZİBOYUTU a). DİZİSİL a diziyi bellekten siler.</td></tr>
+<tr><td>TAMSAYIYAÇEVİR x</td><td>Metni tamsayıya çevirir (s = TAMSAYIYAÇEVİR yazi). ONDALIĞAÇEVİR x metni/tamsayıyı ondalığa, METNEÇEVİR x sayıyı metne çevirir.</td></tr>
+<tr><td>ad[2:5]</td><td>Metin dilimleme: 2. indeksten 5'e kadar (5 dahil değil). ad[:3] ve ad[3:] da yazılabilir.</td></tr>
+<tr><td>İNDEKSARA yazi, 5, aranan</td><td>Metinde 5. indeksten itibaren arar; bulursa indeksi, bulamazsa -1 verir.</td></tr>
+<tr><td>TEKRARLA d1, 5, 10, 7</td><td>5-10. satırları (dahil) 7 kez tekrarlar. d1 döngü adıdır. Bitince gövdeden sonraki satırdan devam eder. Sayılar değişken olabilir.</td></tr>
+<tr><td>İKEN d2, 5, 10, sayi &lt; 7</td><td>Şart DOĞRU olduğu sürece 5-10. satırları tekrarlar. DÖNGÜYÜKIR d2 adı verilen döngüyü kırar. Döngü komutu kendi satır aralığının dışında olmalıdır.</td></tr>
+<tr><td># açıklama</td><td>Satırın sonuna yorum eklenir.</td></tr>
+<tr><td>@dongu: YAZ 1 &nbsp; / &nbsp; GİT @dongu</td><td>Satır başına @isim: yazarak etiket konur. GİT, TEKRARLA ve İKEN'de satır numarası yerine @isim kullanılabilir; satır eklenip silinse de hedef değişmez.</td></tr>
+<tr><td>YUVARLA x, 2</td><td>x sayısını 2 ondalık basamağa yuvarlar (0 verilirse ondalıksız yuvarlar).</td></tr>
+<tr><td>RASTGELE 3, 40</td><td>3 ile 40 arasında (dahil) rastgele bir tamsayı üretir.</td></tr>
+<tr><td>BÜYÜKHARF x / KÜÇÜKHARF x</td><td>Metni büyük/küçük harfe çevirir (Türkçe İ/ı/ğ/ş/ç/ö/ü karakterleri doğru çevrilir).</td></tr>
+<tr><td>BEKLE 0.5</td><td>Belirtilen saniye kadar (ondalık olabilir) bekler.</td></tr>
+<tr><td>DİZİYAZDIR notlar</td><td>Dizinin tüm elemanlarını [ ] içinde ekrana yazar.</td></tr>
+<tr><td>KARAKTEREÇEVİR 65</td><td>Sayının karşılığı olan karakteri döndürür (Python chr gibi).</td></tr>
+<tr><td>SAYIYAÇEVİR 'B'</td><td>Karakterin sayı karşılığını döndürür (Python ord gibi). Birden çok harfli metinde ilk harf alınır.</td></tr>
+<tr><td>MUTLAK sayi</td><td>Sayının mutlak değerini döndürür (MUTLAK -5 = 5).</td></tr>
+<tr><td>KÖK sayi</td><td>Sayının karekökünü döndürür. Negatif sayıda hata verir.</td></tr>
+<tr><td>KIRP yazi</td><td>Metnin başındaki ve sonundaki boşlukları siler. SOLKIRP yalnızca baştaki, SAĞKIRP yalnızca sondaki boşlukları siler.</td></tr>
+<tr><td>ELEMANSİL dizi, 2</td><td>Dizinin 2. elemanını siler; sonraki elemanlar bir sola kayar ve dizi boyutu 1 azalır.</td></tr>
+<tr><td>PARÇALA d, yazi, ","</td><td>yazi'yi belirtilen ayraca göre parçalar, sonucu (metin dizisi) d'ye yazar. d önceden METİNDİZİSİ olarak tanımlanmış olmalı.</td></tr>
+<tr><td>sonuc=BİRLEŞTİR d, ", "</td><td>d dizisinin tüm elemanlarını aralarına ayracı koyarak tek bir metinde birleştirir.</td></tr>
+<tr><td>sonuc=ENBÜYÜK a,b</td><td>İki sayıdan büyük olanını döndürür. ENKÜÇÜK ise küçük olanını döndürür.</td></tr>
+<tr><td>DİZİKOPYALA kaynak, hedef</td><td>kaynak dizisinin içeriğini hedef dizisine kopyalar (aynı türde olmalılar).</td></tr>
+<tr><td>EKRANITEMİZLE</td><td>Terminal ekranındaki tüm çıktıyı temizler.</td></tr>
+<tr><td>sonuc=BUYIL</td><td>Şu anki yılı (örn. 2026) tamsayı olarak döndürür. Parametre almaz.</td></tr>
+<tr><td>\n ve \t</td><td>YAZ ile yazdırılan metinlerde alt satıra geçiş ve TAB boşluğu için kullanılır.</td></tr>
+</table>
+<p>Komutlar büyük/küçük harfe duyarlı değildir (BASLA, başla, BAŞLA aynıdır). Değişken adları duyarlıdır. EĞER komutunun İSE ve DEĞİLSE kısımlarına tek komut yazılır.</p>
+</div><form method="dialog" style="padding:0 18px 14px;text-align:right"><button>Kapat</button></form></dialog>
+
+<script>
+//ENGINE
+class E extends Error{}
+const F=s=>s.toLocaleUpperCase('tr-TR').replace(/Ç/g,'C').replace(/Ğ/g,'G').replace(/İ/g,'I').replace(/Ö/g,'O').replace(/Ş/g,'S').replace(/Ü/g,'U');
+const KW={BASLA:'BASLA',BITIR:'BITIR',GIT:'GIT',TAMSAYI:'TAMSAYI',ONDALIK:'ONDALIK',METIN:'METIN',MANTIK:'MANTIK',EGER:'EGER',ISE:'ISE',DEGILSE:'DEGILSE',OKU:'OKU',YAZ:'YAZ',PAS:'PAS',UZUNLUK:'UZUNLUK',ICINDEMI:'ICINDEMI',ARA:'ARA',VE:'VE',VEYA:'VEYA',DEGIL:'DEGIL',DOGRU:'DOGRU',YANLIS:'YANLIS',AND:'VE',OR:'VEYA',NOT:'DEGIL',TRUE:'DOGRU',FALSE:'YANLIS'};
+'TAMSAYIYACEVIR ONDALIGACEVIR METNECEVIR TAMSAYIDIZISI ONDALIKDIZISI METINDIZISI MANTIKDIZISI DIZISIRALA DIZIBOYUTU DIZISIL DIZIDOLDUR TEKRARLA IKEN DONGUYUKIR INDEKSARA'.split(' ').forEach(k=>KW[k]=k);
+'YUVARLA RASTGELE BUYUKHARF KUCUKHARF BEKLE DIZIYAZDIR KARAKTERECEVIR SAYIYACEVIR'.split(' ').forEach(k=>KW[k]=k);
+'MUTLAK KOK KIRP SAGKIRP SOLKIRP ELEMANSIL'.split(' ').forEach(k=>KW[k]=k);
+'PARCALA BIRLESTIR ENBUYUK ENKUCUK DIZIKOPYALA EKRANITEMIZLE BUYIL'.split(' ').forEach(k=>KW[k]=k);
+const NAMEHINT="Değişken isimleri sayı ile başlayamaz; boşluk, işlem operatörü ya da komut ismi içeremez (yalnızca harf, rakam ve _ kullanılabilir)";
+const DEF={TAMSAYI:0,ONDALIK:0,METIN:'',MANTIK:false};
+const TR={TAMSAYI:'TAMSAYI',ONDALIK:'ONDALIK',METIN:'METİN',MANTIK:'MANTIK'};
+function tok(s){const t=[];let i=0;
+ while(i<s.length){const c=s[i];
+  if(/\s/.test(c)){i++;continue}
+  if(c==='#')break;
+  if(c==='"'||c==="'"){const j=s.indexOf(c,i+1);if(j<0)throw new E('Metnin bitiş tırnağı eksik');const raw=s.slice(i+1,j).replace(/\\n/g,'\n').replace(/\\t/g,'\t');t.push({t:'str',v:raw});i=j+1;continue}
+  if(c==='@'){const r0=s.slice(i+1);const m0=/^[A-Za-z_ÇĞİÖŞÜçğıöşü][A-Za-z0-9_ÇĞİÖŞÜçğıöşü]*/.exec(r0);if(!m0)throw new E("'@' işaretinden sonra bir etiket adı yazılmalı");t.push({t:'lbl',v:m0[0]});i+=1+m0[0].length;continue}
+  const r=s.slice(i);let m;
+  if(m=/^\d+(\.\d+)?/.exec(r)){if(/^[A-Za-z_ÇĞİÖŞÜçğıöşü]/.test(r.slice(m[0].length)))throw new E("Değişken isimleri sayı ile başlayamaz");t.push({t:'num',v:parseFloat(m[0])});i+=m[0].length;continue}
+  if(m=/^[A-Za-z_ÇĞİÖŞÜçğıöşü][A-Za-z0-9_ÇĞİÖŞÜçğıöşü]*/.exec(r)){const k=F(m[0]);t.push(KW[k]?{t:'kw',v:KW[k],w:m[0]}:{t:'id',v:m[0]});i+=m[0].length;continue}
+  if(m=/^(\*\*|\/\/|==|!=|<=|>=|\+=|-=|\*=|\/=|\+\+|--|[-+*\/%<>=()\[\],:])/.exec(r)){t.push({t:'op',v:m[1]});i+=m[1].length;continue}
+  throw new E("Geçersiz karakter '"+c+"' ("+NAMEHINT+")")}
+ return t}
+const bool=(v,w)=>{if(typeof v!=='boolean')throw new E(w+' için DOĞRU/YANLIŞ değeri gerekir');return v};
+const tname=v=>typeof v==='number'?'sayısal':typeof v==='string'?'metin':'mantıksal';
+function ar(o,x,y){
+ if(o==='+'&&typeof x==='string'&&typeof y==='string')return x+y;
+ if(typeof x!=='number'||typeof y!=='number')throw new E("'"+o+"' işleminde iki değer de sayı olmalı (metin birleştirmede iki taraf da METİN olmalı; YAZ komutunda virgül kullanabilirsiniz)");
+ if((o==='/'||o==='//'||o==='%')&&y===0)throw new E('Sıfıra bölme hatası');
+ switch(o){case'+':return x+y;case'-':return x-y;case'*':return x*y;case'/':return x/y;case'//':return Math.floor(x/y);case'%':return((x%y)+y)%y;case'**':return x**y}}
+function cmpf(o,x,y){
+ if(o==='==')return x===y;if(o==='!=')return x!==y;
+ if(typeof x!==typeof y||typeof x==='boolean')throw new E("'"+o+"' yalnızca aynı türdeki sayı ya da metinleri karşılaştırır");
+ return o==='<'?x<y:o==='>'?x>y:o==='<='?x<=y:x>=y}
+function getv(s,n){const v=s.vars.get(n);if(!v)throw new E("'"+n+"' değişkeni tanımlanmamış");return v}
+function check(ty,n,v){
+ const ok=ty==='TAMSAYI'?(typeof v==='number'&&Number.isInteger(v)):ty==='ONDALIK'?typeof v==='number':ty==='METIN'?typeof v==='string':typeof v==='boolean';
+ if(!ok)throw new E("'"+n+"' "+TR[ty]+" türünde; "+(ty==='TAMSAYI'&&typeof v==='number'?'ondalık ('+v+')':tname(v))+" değer atanamaz")}
+function setv(s,n,v){const x=getv(s,n);check(x.ty,n,v);x.v=v}
+const di=(x,i,n)=>{if(!Number.isInteger(i))throw new E('Dizi indeksi tamsayı olmalı');if(i<0||i>=x.v.length)throw new E("'"+n+"' dizisinde "+i+" numaralı eleman yok (geçerli: 0-"+(x.v.length-1)+")");return i};
+const arr=(s,n)=>{const x=getv(s,n);if(x.ty!=='DIZI')throw new E("'"+n+"' bir dizi değil");return x};
+function after(s){for(;;){const t=s.loops[s.loops.length-1];if(!t)return;
+ if(s.next===t.b&&s.cur>=t.a&&s.cur<=t.b){if(t.k==='T'?++t.i<t.c:t.f(s)){s.next=t.a-1;return}s.loops.pop();s.next=Math.max(t.L,t.b)}
+ else if(s.next+1<t.a||s.next+1>t.b)s.loops.pop();else return}}
+const fmt=v=>typeof v==='boolean'?(v?'DOĞRU':'YANLIŞ'):String(v);
+function conv(ty,raw){
+ if(ty==='METIN')return raw;
+ if(ty==='TAMSAYI'){if(!/^\s*[+-]?\d+\s*$/.test(raw))throw new E('Tamsayı girmelisiniz.');return parseInt(raw,10)}
+ if(ty==='ONDALIK'){const x=raw.trim().replace(',','.');if(x===''||isNaN(Number(x)))throw new E('Sayı girmelisiniz.');return Number(x)}
+ const k=F(raw.trim());if(['DOGRU','TRUE','1','EVET'].includes(k))return true;if(['YANLIS','FALSE','0','HAYIR'].includes(k))return false;
+ throw new E('DOĞRU veya YANLIŞ girmelisiniz.')}
+function P(T){let p=0;const pk=()=>T[p],nx=()=>T[p++];
+ const isK=v=>pk()&&pk().t==='kw'&&pk().v===v,isO=v=>pk()&&pk().t==='op'&&pk().v===v;
+ const nameErr=n=>new E("'"+(n?(n.w||n.v):'')+"' geçerli bir değişken ismi değil. "+NAMEHINT);
+ const expect=v=>{if(!isO(v))throw new E("'"+v+"' eksik");nx()};
+ function pOr(){let a=pAnd();while(isK('VEYA')){nx();const l=a,r=pAnd();a=s=>bool(l(s),'VEYA')?true:bool(r(s),'VEYA')}return a}
+ function pAnd(){let a=pNot();while(isK('VE')){nx();const l=a,r=pNot();a=s=>bool(l(s),'VE')?bool(r(s),'VE'):false}return a}
+ function pNot(){if(isK('DEGIL')){nx();const x=pNot();return s=>!bool(x(s),'DEĞİL')}return pCmp()}
+ function pCmp(){let a=pSea();while(pk()&&pk().t==='op'&&['==','!=','<','>','<=','>='].includes(pk().v)){const o=nx().v,l=a,r=pSea();a=s=>cmpf(o,l(s),r(s))}return a}
+ function pSea(){let a=pAr();while(isK('ICINDEMI')||isK('ARA')){const k=nx().v,l=a,r=pAr();
+  a=s=>{const x=l(s),y=r(s);if(typeof x!=='string'||typeof y!=='string')throw new E((k==='ARA'?'ARA':'İÇİNDEMİ')+' yalnızca metinlerle kullanılır');return k==='ARA'?y.indexOf(x):y.includes(x)}}return a}
+ function pAr(){let a=pTerm();while(isO('+')||isO('-')){const o=nx().v,l=a,r=pTerm();a=s=>ar(o,l(s),r(s))}return a}
+ function pTerm(){let a=pUn();while(['*','/','//','%'].some(isO)){const o=nx().v,l=a,r=pUn();a=s=>ar(o,l(s),r(s))}return a}
+ function pUn(){if(isO('-')){nx();const x=pUn();return s=>{const v=x(s);if(typeof v!=='number')throw new E("'-' yalnızca sayıya uygulanır");return -v}}if(isO('+')){nx();return pUn()}return pPow()}
+ function pPow(){const a=pPost();if(isO('**')){nx();const r=pUn();return s=>ar('**',a(s),r(s))}return a}
+ function pPost(){let a=pPri();while(isO('[')){nx();let i0=null,i1=null,sl=false;if(!isO(':'))i0=pOr();if(isO(':')){nx();sl=true;if(!isO(']'))i1=pOr()}expect(']');const l=a,id=a.id;
+  a=s=>{let v,i;if(id){const x=getv(s,id);if(x.ty==='DIZI'){if(sl)throw new E('Dizilerde [a:b] dilimleme kullanılamaz');return x.v[di(x,i0(s),id)]}v=x.v}else v=l(s);
+   if(typeof v!=='string')throw new E('[ ] yalnızca metin ve dizilerde kullanılır');
+   if(sl){let b=i0?i0(s):0,e=i1?i1(s):v.length;if(!Number.isInteger(b)||!Number.isInteger(e))throw new E('Dilim sınırları tamsayı olmalı');if(b<0)b=Math.max(0,b+v.length);if(e<0)e=Math.max(0,e+v.length);return v.slice(b,e)}
+   i=i0(s);if(!Number.isInteger(i))throw new E('Index tamsayı olmalı');if(i<0||i>=v.length)throw new E('Index '+i+' geçersiz (metin uzunluğu '+v.length+')');return v[i]}}return a}
+  function pPri(){const t=nx();if(!t)throw new E('İfade eksik');
+  if(t.t==='num'||t.t==='str')return()=>t.v;
+  if(t.t==='lbl'){const nm=t.v;return s=>{if(!(nm in s.labels))throw new E("'@"+nm+"' etiketi tanımlı değil");return s.labels[nm]}}
+  if(t.t==='id'){const f=s=>{const x=getv(s,t.v);if(x.ty==='DIZI')throw new E("'"+t.v+"' bir dizidir; elemanına "+t.v+"[0] şeklinde ulaşın");return x.v};f.id=t.v;return f}
+  if(t.t==='kw'){if(t.v==='DOGRU')return()=>true;if(t.v==='YANLIS')return()=>false;
+   if(['TAMSAYIYACEVIR','ONDALIGACEVIR','METNECEVIR'].includes(t.v)){const x=pUn();return s=>{const v=x(s);
+    if(t.v==='METNECEVIR')return fmt(v);
+    if(t.v==='TAMSAYIYACEVIR'){if(typeof v==='number')return Math.trunc(v);if(typeof v==='string'&&/^\s*[+-]?\d+\s*$/.test(v))return parseInt(v,10);throw new E("'"+v+"' tamsayıya çevrilemez")}
+    if(typeof v==='number')return v;const z=typeof v==='string'?v.trim().replace(',','.'):'';if(z!==''&&!isNaN(Number(z)))return Number(z);throw new E("'"+v+"' ondalık sayıya çevrilemez")}}
+   if(t.v==='DIZIBOYUTU'){const n=nx();if(!n||n.t!=='id')throw new E('DİZİBOYUTU komutundan sonra dizi adı gelmeli');return s=>arr(s,n.v).v.length}
+   if(t.v==='INDEKSARA'){const m=pOr();expect(',');const b=pOr();expect(',');const q=pOr();return s=>{const y=m(s),i=b(s),x=q(s);if(typeof y!=='string'||typeof x!=='string')throw new E('İNDEKSARA yalnızca metinlerle kullanılır');if(!Number.isInteger(i)||i<0)throw new E('Başlangıç indeksi 0 veya pozitif tamsayı olmalı');return i>=y.length?-1:y.indexOf(x,i)}}
+   if(t.v==='UZUNLUK'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string')throw new E('UZUNLUK yalnızca metinle kullanılır');return v.length}}
+   if(t.v==='YUVARLA'){const x=pOr();expect(',');const d0=pOr();return s=>{const v=x(s),d=d0(s);if(typeof v!=='number')throw new E('YUVARLA yalnızca sayılarla kullanılır');if(!Number.isInteger(d)||d<0)throw new E('YUVARLA: basamak sayısı 0 veya pozitif bir tamsayı olmalı');const f=Math.pow(10,d);return Math.round(v*f)/f}}
+   if(t.v==='RASTGELE'){const a0=pOr();expect(',');const b0=pOr();return s=>{const lo=a0(s),hi=b0(s);if(!Number.isInteger(lo)||!Number.isInteger(hi))throw new E('RASTGELE başlangıç ve bitiş değerleri tamsayı olmalı');if(lo>hi)throw new E('RASTGELE: başlangıç değeri bitiş değerinden büyük olamaz');return lo+Math.floor(Math.random()*(hi-lo+1))}}
+   if(t.v==='BUYUKHARF'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string')throw new E('BÜYÜKHARF yalnızca metinlerle kullanılır');return v.toLocaleUpperCase('tr-TR')}}
+   if(t.v==='KUCUKHARF'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string')throw new E('KÜÇÜKHARF yalnızca metinlerle kullanılır');return v.toLocaleLowerCase('tr-TR')}}
+   if(t.v==='KARAKTERECEVIR'){const x=pUn();return s=>{const v=x(s);if(!Number.isInteger(v)||v<0||v>0x10FFFF)throw new E('KARAKTEREÇEVİR 0 ile 1114111 arasında bir tamsayı bekler');return String.fromCodePoint(v)}}
+   if(t.v==='SAYIYACEVIR'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string'||v.length===0)throw new E('SAYIYAÇEVİR bir karakter ya da metin bekler');return v.codePointAt(0)}}
+   if(t.v==='MUTLAK'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='number')throw new E('MUTLAK yalnızca sayılarla kullanılır');return Math.abs(v)}}
+   if(t.v==='KOK'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='number')throw new E('KÖK yalnızca sayılarla kullanılır');if(v<0)throw new E('Negatif bir sayının karekökü hesaplanamaz');return Math.sqrt(v)}}
+   if(t.v==='KIRP'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string')throw new E('KIRP yalnızca metinlerle kullanılır');return v.trim()}}
+   if(t.v==='SAGKIRP'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string')throw new E('SAĞKIRP yalnızca metinlerle kullanılır');return v.trimEnd()}}
+   if(t.v==='SOLKIRP'){const x=pUn();return s=>{const v=x(s);if(typeof v!=='string')throw new E('SOLKIRP yalnızca metinlerle kullanılır');return v.trimStart()}}
+   if(t.v==='ENBUYUK'){const a0=pOr();expect(',');const b0=pOr();return s=>{const x=a0(s),y=b0(s);if(typeof x!=='number'||typeof y!=='number')throw new E('ENBÜYÜK yalnızca sayılarla kullanılır');return Math.max(x,y)}}
+   if(t.v==='ENKUCUK'){const a0=pOr();expect(',');const b0=pOr();return s=>{const x=a0(s),y=b0(s);if(typeof x!=='number'||typeof y!=='number')throw new E('ENKÜÇÜK yalnızca sayılarla kullanılır');return Math.min(x,y)}}
+   if(t.v==='BIRLESTIR'){const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: BİRLEŞTİR dizi_adı, ayraç');expect(',');const a0=pOr();return s=>{const x=arr(s,n.v),ayrac=a0(s);if(typeof ayrac!=='string')throw new E('BİRLEŞTİR ayracı bir metin olmalı');return x.v.map(fmt).join(ayrac)}}
+   if(t.v==='BUYIL')return()=>new Date().getFullYear();}
+  if(t.t==='op'&&t.v==='('){const e=pOr();expect(')');return e}
+  if(t.t==='op'&&t.v==='=')throw new E("Karşılaştırma için '==' kullanın");
+  throw new E("Beklenmeyen ifade: '"+(t.w||t.v)+"'")}
+ function stmt(){const t=nx();if(!t)throw new E('Komut eksik');
+  if(t.t==='kw')switch(t.v){
+   case'BASLA':case'PAS':return async()=>{};
+   case'BITIR':return async s=>{s.end=true};
+   case'GIT':{const e=pOr();return async s=>{const n=e(s);if(!Number.isInteger(n)||n<1||n>s.n)throw new E('GİT: geçersiz satır numarası ('+n+')');s.next=n-1}}
+   case'TAMSAYI':case'ONDALIK':case'METIN':case'MANTIK':{const ty=t.v,it=[];
+    do{const n=nx();if(!n||n.t!=='id')throw nameErr(n);if(pk()&&!isO(',')&&!isO('='))throw nameErr(pk());
+     let init=null;if(isO('=')){nx();init=pOr()}it.push({n:n.v,init})}while(isO(',')&&nx());
+    return async s=>{for(const d of it){if(s.vars.has(d.n))throw new E("'"+d.n+"' değişkeni zaten tanımlanmış");const v=d.init?d.init(s):DEF[ty];check(ty,d.n,v);s.vars.set(d.n,{ty,v})}}}
+   case'EGER':{const c=pOr();if(!isK('ISE'))throw new E("EĞER komutunda 'İSE' eksik");nx();const a=stmt();let b=async()=>{};
+    if(isK('DEGILSE')){nx();b=stmt()}
+    return async s=>{const v=c(s);if(typeof v!=='boolean')throw new E('EĞER şartı DOĞRU veya YANLIŞ olmalı');await(v?a:b)(s)}}
+   case'OKU':{let pr='';if(pk()&&pk().t==='str'){pr=nx().v;if(!isO(','))throw new E('OKU: mesajdan sonra virgül ve değişken adı gerekir');nx()}
+    const n=nx();if(!n||n.t!=='id')throw new E('OKU komutunda değişken adı gerekli');let ix=null;if(isO('[')){nx();ix=pOr();expect(']')}
+    return async s=>{const x=getv(s,n.v);let ty=x.ty,i;if(ty==='DIZI'){if(!ix)throw new E("'"+n.v+"' bir dizi; OKU için eleman belirtin ("+n.v+"[0])");i=di(x,ix(s),n.v);ty=x.et}else if(ix)throw new E("'"+n.v+"' dizi değil");
+     for(;;){const raw=await s.io.read(pr);try{const v=conv(ty,raw);if(ix)x.v[i]=v;else x.v=v;break}catch(e){if(!(e instanceof E))throw e;s.io.out(e.message+' Tekrar deneyin.','wr')}}}}
+   case'TAMSAYIDIZISI':case'ONDALIKDIZISI':case'METINDIZISI':case'MANTIKDIZISI':{const et=t.v.replace('DIZISI',''),it=[];
+    do{const n=nx();if(!n||n.t!=='id')throw nameErr(n);expect('[');const z=pOr();expect(']');it.push({n:n.v,z})}while(isO(',')&&nx());
+    return async s=>{for(const d of it){if(s.vars.has(d.n))throw new E("'"+d.n+"' değişkeni zaten tanımlanmış");const z=d.z(s);if(!Number.isInteger(z)||z<1||z>100000)throw new E('Dizi boyutu 1 ile 100000 arasında bir tamsayı olmalı');s.vars.set(d.n,{ty:'DIZI',et,v:Array(z).fill(DEF[et])})}}}
+   case'DIZIDOLDUR':{const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: DİZİDOLDUR dizi_adı, değer');expect(',');const e=pOr();return async s=>{const x=arr(s,n.v),v=e(s);check(x.et,n.v,v);x.v.fill(v)}}
+   case'ELEMANSIL':{const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: ELEMANSİL dizi_adı, indeks');expect(',');const e=pOr();return async s=>{const x=arr(s,n.v),i=di(x,e(s),n.v);x.v.splice(i,1)}}
+   case'PARCALA':{const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: PARÇALA dizi_adı, metin, ayraç');expect(',');const m=pOr();expect(',');const a0=pOr();
+    return async s=>{const x=arr(s,n.v);if(x.et!=='METIN')throw new E("'"+n.v+"' bir METİN dizisi olmalı");const yazi=m(s),ayrac=a0(s);if(typeof yazi!=='string'||typeof ayrac!=='string')throw new E('PARÇALA metin ve ayraç bekler');x.v=ayrac===''?yazi.split(''):yazi.split(ayrac)}}
+   case'DIZIKOPYALA':{const kn=nx();if(!kn||kn.t!=='id')throw new E('Kullanım: DİZİKOPYALA kaynak, hedef');expect(',');const hn=nx();if(!hn||hn.t!=='id')throw new E('Kullanım: DİZİKOPYALA kaynak, hedef');
+    return async s=>{const k=arr(s,kn.v),h=arr(s,hn.v);if(k.et!==h.et)throw new E("'"+kn.v+"' ve '"+hn.v+"' aynı türde diziler olmalı");h.v=k.v.slice()}}
+   case'EKRANITEMIZLE':return async s=>{s.io.clear()};
+   case'DIZISIRALA':{const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: DİZİSIRALA dizi_adı, DOĞRU/YANLIŞ');let e=null;if(isO(',')){nx();e=pOr()}
+    return async s=>{const x=arr(s,n.v),up=e?bool(e(s),'DİZİSIRALA'):true;x.v.sort(x.et==='METIN'?(p,q)=>p.localeCompare(q,'tr'):(p,q)=>p-q);if(!up)x.v.reverse()}}
+   case'DIZISIL':{const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: DİZİSİL dizi_adı');return async s=>{arr(s,n.v);s.vars.delete(n.v)}}
+   case'TEKRARLA':case'IKEN':{const k=t.v==='TEKRARLA'?'T':'I';const nm=nx();if(!nm||nm.t!=='id')throw new E('Kullanım: '+t.w+' isim, başlangıç_satırı, bitiş_satırı, '+(k==='T'?'tekrar_sayısı':'şart'));
+    const g=()=>{expect(',');return pOr()};const a=g(),b=g(),c=g();
+    return async s=>{const A=a(s),B=b(s);if(!Number.isInteger(A)||!Number.isInteger(B)||A<1||B>s.n||A>B)throw new E('Döngü satır aralığı geçersiz ('+A+'-'+B+')');
+     if(s.cur>=A&&s.cur<=B)throw new E('Döngü komutu kendi satır aralığının içinde olamaz');
+     const i=s.loops.findIndex(l=>l.name===nm.v);if(i>=0)s.loops.length=i;
+     let f=null,cnt=0,go;if(k==='T'){cnt=c(s);if(!Number.isInteger(cnt)||cnt<0)throw new E('Tekrar sayısı 0 veya pozitif tamsayı olmalı');go=cnt>0}else{f=s2=>bool(c(s2),'İKEN');go=f(s)}
+     if(!go){s.next=Math.max(s.cur,B);return}
+     s.loops.push({name:nm.v,a:A,b:B,L:s.cur,k,c:cnt,i:0,f});s.next=A-1}}
+   case'DONGUYUKIR':{const nm=nx();if(!nm||nm.t!=='id')throw new E('Kullanım: DÖNGÜYÜKIR döngü_ismi');
+    return async s=>{const i=s.loops.map(l=>l.name).lastIndexOf(nm.v);if(i<0)throw new E("'"+nm.v+"' isimli çalışan bir döngü yok");const l=s.loops[i];s.loops.length=i;s.next=Math.max(l.L,l.b)}}
+   case'BEKLE':{const e=pOr();return async s=>{const sec=e(s);if(typeof sec!=='number'||sec<0)throw new E('BEKLE süresi 0 veya pozitif bir sayı olmalı');await s.io.wait(sec)}}
+   case'DIZIYAZDIR':{const n=nx();if(!n||n.t!=='id')throw new E('Kullanım: DİZİYAZDIR dizi_adı');return async s=>{const x=arr(s,n.v);s.io.out(n.v+' = ['+x.v.map(fmt).join(', ')+']')}}
+   case'YAZ':{const it=[];if(p<T.length)do{it.push(pOr())}while(isO(',')&&nx());
+    return async s=>{s.io.out(it.map(f=>fmt(f(s))).join(''))}}
+   default:throw new E("'"+t.w+"' burada kullanılamaz")}
+  if(t.t==='id'){let ix=null;if(isO('[')){nx();ix=pOr();expect(']')}
+   if(isO(',')){const tgs=[{name:t.v,ix}];
+    while(isO(',')){nx();const nid=nx();if(!nid||nid.t!=='id')throw new E('Çoklu atamada virgülden sonra bir değişken adı beklenir');let ix2=null;if(isO('[')){nx();ix2=pOr();expect(']')}tgs.push({name:nid.v,ix:ix2})}
+    expect('=');
+    const exprs=[pOr()];while(isO(',')){nx();exprs.push(pOr())}
+    if(exprs.length!==tgs.length)throw new E('Sol taraftaki değişken sayısı ('+tgs.length+') ile sağ taraftaki değer sayısı ('+exprs.length+') eşit olmalı');
+    return async s=>{const vals=exprs.map(e=>e(s));const setters=tgs.map(tg2=>{const x=getv(s,tg2.name);
+      if(!tg2.ix){if(x.ty==='DIZI')throw new E("'"+tg2.name+"' bir dizidir; elemanına "+tg2.name+"[0] şeklinde değer atayın");return v=>setv(s,tg2.name,v)}
+      if(x.ty!=='DIZI')throw new E("'"+tg2.name+"' dizi değil; [ ] ile eleman atanamaz");const i=di(x,tg2.ix(s),tg2.name);return v=>{check(x.et,tg2.name+'['+i+']',v);x.v[i]=v}});
+     setters.forEach((set,idx)=>set(vals[idx]))}}
+   const o=nx();
+   const tg=s=>{const x=getv(s,t.v);if(!ix){if(x.ty==='DIZI')throw new E("'"+t.v+"' bir dizidir; elemanına "+t.v+"[0] şeklinde değer atayın");return{g:()=>x.v,p:v=>setv(s,t.v,v)}}
+    if(x.ty!=='DIZI')throw new E("'"+t.v+"' dizi değil; [ ] ile eleman atanamaz");const i=di(x,ix(s),t.v);return{g:()=>x.v[i],p:v=>{check(x.et,t.v+'['+i+']',v);x.v[i]=v}}};
+   if(o&&o.t==='op'&&(o.v==='++'||o.v==='--'))return async s=>{const r=tg(s),c=r.g();if(typeof c!=='number')throw new E("'"+o.v+"' yalnızca sayılarla kullanılır");r.p(c+(o.v==='++'?1:-1))};
+   if(o&&o.t==='op'&&['=','+=','-=','*=','/='].includes(o.v)){const e=pOr();return async s=>{const r=tg(s);let v=e(s);if(o.v!=='=')v=ar(o.v[0],r.g(),v);r.p(v)}}
+   throw new E("Bilinmeyen komut ya da hatalı satır: '"+t.v+"'")}
+  throw new E("Beklenmeyen ifade: '"+(t.w||t.v)+"'")}
+ return{stmt,done(){if(p<T.length)throw new E("Beklenmeyen ifade: '"+(T[p].w||T[p].v)+"'")}}}
+function derle(text){const L0=text.split('\n'),labels={},L=L0.slice(),stmts=[],errors=[];let fk=null,lk=null,fi=-1,li=-1;
+ L.forEach((raw,i)=>{const m=/^(\s*)@([A-Za-z_ÇĞİÖŞÜçğıöşü][A-Za-z0-9_ÇĞİÖŞÜçğıöşü]*)\s*:(.*)$/.exec(raw);if(!m)return;
+  if(Object.prototype.hasOwnProperty.call(labels,m[2]))errors.push({line:i+1,msg:"'@"+m[2]+"' etiketi birden fazla kez tanımlanmış"});
+  labels[m[2]]=i+1;L[i]=m[3]});
+ L.forEach((raw,i)=>{try{const t=tok(raw);if(!t.length){stmts.push(async()=>{});return}
+  if(!fk){fk=t[0];fi=i}lk=t[0];li=i;
+  if(t[0].t==='kw'&&t[0].v==='BASLA'&&i!==fi)throw new E('BAŞLA yalnızca ilk komut olabilir');
+  const q=P(t),st=q.stmt();q.done();stmts.push(st)}catch(e){if(!(e instanceof E))throw e;errors.push({line:i+1,msg:e.message});stmts.push(null)}});
+ if(!fk)errors.push({line:1,msg:'Algoritma boş. İlk komut BAŞLA, son komut BİTİR olmalı'});
+ else{if(!(fk.t==='kw'&&fk.v==='BASLA'))errors.push({line:fi+1,msg:'Algoritma BAŞLA komutu ile başlamalı'});
+  if(!(lk.t==='kw'&&lk.v==='BITIR'))errors.push({line:li+1,msg:'Algoritma BİTİR komutu ile bitmeli'})}
+ return{stmts,errors,labels}}
+async function calistir(text,io){const{stmts,errors,labels}=derle(text);
+ if(errors.length){errors.forEach(e=>io.hata(e.line,e.msg));return false}
+ const s={vars:new Map(),io,n:stmts.length,next:0,end:false,cur:0,loops:[],labels};let pc=0,steps=0;
+ try{while(pc<stmts.length&&!s.end){s.cur=pc+1;s.next=pc+1;if(io.beforeStep)await io.beforeStep(s.cur,s.vars);await stmts[pc](s);after(s);pc=s.next;
+  if(++steps>500000)throw new E('Çok fazla adım çalıştı; sonsuz döngü olabilir');
+  if(steps%300===0){await new Promise(r=>setTimeout(r));if(io.stopped())throw new E('Program durduruldu')}}}
+ catch(e){if(!(e instanceof E))throw e;io.hata(pc+1,e.message);return false}
+ return true}
+//ENDENGINE
+
+const $=id=>document.getElementById(id);
+const ed=$('ed'),gut=$('gut'),term=$('term'),hl=$('hl');
+const SAMPLE='BAŞLA\nMETİN ad\nTAMSAYI a, b, toplam\nOKU "Adınız : ", ad\nYAZ "Merhaba ", ad, "! Adınız ", UZUNLUK ad, " harflidir."\nEĞER \'a\' İÇİNDEMİ ad İSE YAZ "Adınızda a harfi var." DEĞİLSE YAZ "Adınızda a harfi yok."\nOKU "1. sayı : ", a\nOKU "2. sayı : ", b\ntoplam = a + b * 2\nYAZ "a + b * 2 = ", toplam\nBİTİR';
+const NEW='BAŞLA\n\nBİTİR';
+const escHtml=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function highlight(text){
+ return text.split('\n').map(line=>{let out='',i=0,n=line.length;
+  while(i<n){const c=line[i];
+   if(c==='#'){out+=escHtml(line.slice(i));break}
+   if(c==='"'||c==="'"){let j=line.indexOf(c,i+1);const end=j<0?n:j+1;out+='<span class="str">'+escHtml(line.slice(i,end))+'</span>';i=end;continue}
+   if(c==='@'){const m=/^@[A-Za-z_ÇĞİÖŞÜçğıöşü][A-Za-z0-9_ÇĞİÖŞÜçğıöşü]*/.exec(line.slice(i));
+    if(m){let seg=m[0],end=i+seg.length;const cm=/^\s*:/.exec(line.slice(end));if(cm){seg+=cm[0];end+=cm[0].length}
+     out+='<span class="lbl">'+escHtml(seg)+'</span>';i=end;continue}
+    out+=escHtml(c);i++;continue}
+   if(/[A-Za-zÇĞİÖŞÜçğıöşü_]/.test(c)){const m=/^[A-Za-z_ÇĞİÖŞÜçğıöşü][A-Za-z0-9_ÇĞİÖŞÜçğıöşü]*/.exec(line.slice(i));const w=m[0],k=F(w);
+    out+=KW[k]?'<span class="'+(KW[k]==='GIT'?'gt':'kw')+'">'+escHtml(w)+'</span>':escHtml(w);i+=w.length;continue}
+   out+=escHtml(c);i++}
+  return out}).join('\n')}
+function gutter(){const n=ed.value.split('\n').length;gut.innerHTML=Array.from({length:n},(_,i)=>'<i>'+(i+1)+'</i>').join('');gut.scrollTop=ed.scrollTop;hl.innerHTML=highlight(ed.value);hl.scrollTop=ed.scrollTop;hl.scrollLeft=ed.scrollLeft}
+function clearMarks(){for(const el of gut.children)el.className=''}
+function mark(line,cls){clearMarks();const el=gut.children[line-1];if(el){el.className=cls;el.scrollIntoView({block:'nearest'})}}
+ed.addEventListener('input',()=>gutter());
+ed.addEventListener('scroll',()=>{gut.scrollTop=ed.scrollTop;hl.scrollTop=ed.scrollTop;hl.scrollLeft=ed.scrollLeft});
+function out(txt,cls){const d=document.createElement('div');d.className='ln '+(cls||'');d.textContent=cls==='sys'||cls==='er'||cls==='wr'?'>_ '+txt:'>_ '+txt;term.append(d);term.scrollTop=term.scrollHeight}
+let stop=false,pending=null,running=false,hizMs=0,izleAcik=false;
+const TRTUR={TAMSAYI:'TAMSAYI',ONDALIK:'ONDALIK',METIN:'METİN',MANTIK:'MANTIK'};
+const izletbl=$('izletbl');
+function vfmt(x){if(x.ty==='DIZI')return'['+x.v.map(e=>typeof e==='boolean'?(e?'DOĞRU':'YANLIŞ'):typeof e==='string'?'"'+e+'"':String(e)).join(', ')+']';return typeof x.v==='boolean'?(x.v?'DOĞRU':'YANLIŞ'):typeof x.v==='string'?'"'+x.v+'"':String(x.v)}
+function updateVars(vars){if(!izleAcik)return;const rows=[];for(const[n,x]of vars)rows.push('<tr><td>'+n+'</td><td>'+(x.ty==='DIZI'?TRTUR[x.et]+' dizisi':TRTUR[x.ty])+'</td><td>'+vfmt(x)+'</td></tr>');
+ izletbl.querySelector('tbody').innerHTML=rows.join('')||'<tr><td colspan="3" style="color:var(--mt)">Henüz değişken yok</td></tr>'}
+async function sleepChunked(ms){let left=ms;while(left>0){const d=Math.min(30,left);await new Promise(r=>setTimeout(r,d));left-=d;if(stop)return}}
+$('izlebtn').onclick=()=>{izleAcik=!izleAcik;$('izle').classList.toggle('hid',!izleAcik);$('izlebtn').setAttribute('aria-pressed',String(izleAcik));$('izlebtn').style.borderColor=izleAcik?'var(--ac)':''};
+$('hiz').oninput=e=>{hizMs=+e.target.value;$('hizval').textContent=hizMs===0?'en hızlı':(hizMs/1000).toFixed(2)+' sn'};
+const io={out,stopped:()=>stop,
+ clear(){term.innerHTML=''},
+ hata(l,m){out('HATA – Satır '+l+': '+m,'er');mark(l,m==='Program durduruldu'?'stp':'e')},
+ async beforeStep(line,vars){if(izleAcik){mark(line,'cur');updateVars(vars)}if(hizMs>0){mark(line,'cur');await sleepChunked(hizMs)}if(stop)throw new E('Program durduruldu')},
+ async wait(sec){await sleepChunked(sec*1000);if(stop)throw new E('Program durduruldu')},
+ read(pr){return new Promise((res,rej)=>{const d=document.createElement('div');d.className='ln in';const sp=document.createElement('span');sp.textContent='>_ '+pr;const inp=document.createElement('input');inp.setAttribute('aria-label','Veri girişi');d.append(sp,inp);term.append(d);inp.focus();pending={rej,d};
+  inp.onkeydown=e=>{if(e.key==='Enter'){const v=inp.value;d.className='ln';d.textContent='>_ '+pr;const g=document.createElement('span');g.className='ok';g.textContent=v;d.append(g);pending=null;res(v)}}})}};
+async function run(){if(running)return;running=true;stop=false;term.innerHTML='';gutter();clearMarks();
+ $('run').disabled=true;$('stop').disabled=false;$('yeni').disabled=true;$('ac').disabled=true;$('kaydet').disabled=true;ed.disabled=true;
+ out('Derleyici çalışıyor...','sys');
+ try{const ok=await calistir(ed.value,io);if(ok){out('Program başarıyla sonlandı.','sys');clearMarks()}}
+ catch(e){if(e instanceof E)out(e.message,'sys');else out('Beklenmeyen hata: '+e.message,'er')}
+ running=false;$('run').disabled=false;$('stop').disabled=true;$('yeni').disabled=false;$('ac').disabled=false;$('kaydet').disabled=false;ed.disabled=false}
+$('run').onclick=run;
+$('stop').onclick=()=>{stop=true;if(pending){pending.d.remove();pending.rej(new E('Program durduruldu'));pending=null}};
+$('yeni').onclick=()=>{if(ed.value.trim()&&ed.value!==NEW&&!confirm('Mevcut algoritma silinecek. Yeni algoritma açılsın mı?'))return;ed.value=NEW;term.innerHTML='';gutter()};
+$('ac').onclick=()=>$('dosya').click();
+$('dosya').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{ed.value=String(r.result).replace(/\r\n/g,'\n');term.innerHTML='';gutter()};r.readAsText(f,'utf-8');e.target.value=''};
+$('kaydet').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+ed.value],{type:'text/plain;charset=utf-8'}));a.download='algoritma.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('yardim').onclick=()=>$('dlg').showModal();
+ed.value=SAMPLE;gutter();
+</script>
+</body>
+</html>
